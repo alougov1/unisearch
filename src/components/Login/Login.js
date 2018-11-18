@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Login.css";
+import Header from '../Header/Header';
 
 export default class Login extends Component {
   constructor(props) {

@@ -27,8 +27,6 @@ class App extends Component {
       //<Login />
 
       <div>
-
-      <Header />
       BLUETOOTH</div>
     );
   }

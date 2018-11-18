@@ -5,17 +5,23 @@ import App from './App';
 import Login from './components/Login/Login.js'
 import * as serviceWorker from './serviceWorker';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import Header from './components/Header/Header';
+import Search from './components/Search/Search';
+import Profile from './components/Profile/Profile';
+import Settings from './components/Settings/Settings';
 
 const routing = (
   <Router>
     <div>
-      <ul>
-        <li>
-          <Link to="/components/Login/Login.js">Login</Link>
-        </li>
-      </ul>
-      <Route exact path="/" component={App} />
-      <Route path="/components/Login/Login.js" component={Login} />
+        <Header />
+
+        <switch> 
+            <Route exact path="/" component={App} />
+            <Route path="/components/Search/Search.js" component={Search} />
+            <Route path="/components/Profile/Profile.js" component={Profile} />
+            <Route path="/components/Settings/Settings.js" component={Settings} />
+        </switch>
+        
     </div>
   </Router>
 )
