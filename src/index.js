@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import Login from './components/Login/Login.js'
 import * as serviceWorker from './serviceWorker';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Route, Link, Switch, BrowserRouter as Router } from 'react-router-dom'
 import Header from './components/Header/Header';
 import Search from './components/Search/Search';
 import Profile from './components/Profile/Profile';
@@ -15,12 +15,12 @@ const routing = (
     <div>
         <Header />
 
-        <switch> 
+        <Switch> 
             <Route exact path="/" component={App} />
             <Route path="/components/Search/Search.js" component={Search} />
             <Route path="/components/Profile/Profile.js" component={Profile} />
             <Route path="/components/Settings/Settings.js" component={Settings} />
-        </switch>
+        </Switch>
         
     </div>
   </Router>
