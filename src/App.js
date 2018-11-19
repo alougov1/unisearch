@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './components/Header/Header.js';
-import Login from './components/Login/Login.js';
 import { Redirect } from 'react-router-dom'
+import Login from './components/Login/Login';
 
 class App extends Component {
 
@@ -11,6 +10,8 @@ class App extends Component {
 
       <div>
       BLUETOOTH
+
+      <Login />
       </div>
     );
   }
