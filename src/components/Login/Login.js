@@ -25,46 +25,45 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    console.log(this.state.username);
+    console.log(this.state.password);
   }
 
   render() {
     return (
+        <div className="container">
         <Grid>
-            <Col sm={20} md={40}>
-                <code>
+            <Row>
+                <Col>
                     <div className="Login">
                         <form onSubmit={this.handleSubmit}>
                         <FormGroup controlId="username" bsSize="large">
                             <ControlLabel>Username</ControlLabel>
                             <FormControl
-                            autoFocus
                             type="username"
                             value={this.state.username}
-                            onChange={this.handleChange}
-                            />
+                            onChange={this.handleChange}/>
                         </FormGroup>
                         <FormGroup controlId="password" bsSize="large">
                             <ControlLabel>Password</ControlLabel>
                             <FormControl
                             value={this.state.password}
                             onChange={this.handleChange}
-                            type="password"
-                            />
+                            type="password"/>
                         </FormGroup>
                         <Button
                             block
                             bsSize="large"
                             disabled={!this.validateForm()}
-                            type="submit"
-                        >
+                            type="submit">
                             Login
                         </Button>
                         </form>
                     </div>
-                </code>
-            </Col>
+                </Col>
+            </Row>
         </Grid>
-      
+      </div>
     );
   }
 }

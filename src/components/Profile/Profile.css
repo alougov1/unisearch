@@ -1,0 +1,18 @@
+.name {
+    font-size: 40px;
+    align-content: center;
+    justify-content: center;
+}
+
+label {
+    padding-right:10px;
+}
+
+.fields {
+    align-content: right;
+}
+
+.row {
+    padding-bottom:15px;
+}
+
