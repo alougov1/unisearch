@@ -1,0 +1,34 @@
+//var express    = require("express");
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'unisearch.cw7uxohppzrc.us-east-1.rds.amazonaws.com',
+  port      :  '3306',
+  user     : 'alougov1',
+  password : 'iamroot123',
+  database : 'unisearch'
+
+});
+//var app = express();
+
+
+connection.connect(function(err){
+if(!err) {
+    console.log("Database is connected ... ");
+} else {
+    console.log("Error connecting to database ... ");
+}
+});
+
+connection.query("SELECT * FROM studentAccount", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+
+
+//end connection
+connection.end(function(err) {
+  if (err) {
+    return console.log('Error:' + err.message);
+  }
+  console.log('Closed the database connection successfully.');
+});
