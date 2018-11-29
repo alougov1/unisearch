@@ -17,13 +17,6 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-routes(app);
-
-var server = app.listen(3000, function () {
-    console.log("app running on port.", server.address().port);
-});
-
-
 connection.connect(function(err){
 if(!err) {
     console.log("Database is connected ... ");
@@ -32,11 +25,11 @@ if(!err) {
 }
 });
 
-connection.query("SELECT * FROM studentAccount", function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-  });
+routes(app);
 
+var server = app.listen(3000, function () {
+    console.log("app running on port.", server.address().port);
+});
 
 //end connection
 connection.end(function(err) {
