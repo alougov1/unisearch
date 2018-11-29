@@ -1,5 +1,7 @@
-//var express    = require("express");
+var express    = require("express");
 var mysql      = require('mysql');
+var bodyParser = require("body-parser");
+var routes = require("./src/routes.js");
 var connection = mysql.createConnection({
   host     : 'unisearch.cw7uxohppzrc.us-east-1.rds.amazonaws.com',
   port      :  '3306',
@@ -8,7 +10,18 @@ var connection = mysql.createConnection({
   database : 'unisearch'
 
 });
-//var app = express();
+
+var app = express();
+
+// accept JSON or URL-encoded values
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+routes(app);
+
+var server = app.listen(3000, function () {
+    console.log("app running on port.", server.address().port);
+});
 
 
 connection.connect(function(err){
