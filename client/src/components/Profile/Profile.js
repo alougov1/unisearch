@@ -24,13 +24,22 @@ class Profile extends Component {
       gender:   '',
       age:  0,
       hometown:   '',
-
-
-
+      data: [],
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleEdit = this.toggleEdit.bind(this)
+  }
+
+  componentDidMount() {
+    fetch('/student')
+            .then(res => {
+                console.log(res);
+             })
+            .then(data => { 
+                console.log(data); 
+                this.setState({ data })
+             });
   }
 
   handleChange (event) {

@@ -31,10 +31,3 @@ var server = app.listen(3001, function () {
     console.log("app running on port.", server.address().port);
 });
 
-//end connection
-connection.end(function(err) {
-  if (err) {
-    return console.log('Error:' + err.message);
-  }
-  console.log('Closed the database connection successfully.');
-});

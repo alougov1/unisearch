@@ -7,11 +7,9 @@ var appRouter = function (app) {
 
   app.get("/student", function (req, res) {
     var firstName = "";
-    var lastName = "";
-    //continue this stuff
 
     //run this to
-    connection.query("SELECT * FROM studentAccount", function (err, result, fields) {
+    connection.query("SELECT * FROM studentAccount", function (err, result) {
         if (err) throw err;
         firstName = result;
       });
