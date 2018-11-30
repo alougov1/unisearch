@@ -3,17 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "express": "^4.16.4",
     "mysql": "^2.16.0",
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "concurrently": "^3.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "client": "cd client && npm start",
+    "server": "cd server && node server.js",
+    "start": "concurrently --kill-others \"npm run server\" \"npm run client\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -25,5 +26,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4"
+  }
 }
