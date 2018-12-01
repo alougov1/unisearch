@@ -15,14 +15,14 @@ const routing = (
     <div>
         <Header />
 
-        <Switch> 
+        <Switch>
             <Route exact path="/" component={App} />
             <Route path="/components/Search/Search.js" component={Search} />
             <Route path="/components/Profile/Profile.js" component={Profile} />
             <Route path="/components/Settings/Settings.js" component={Settings} />
             <Route path="/components/Login/Login.js" component={Login} />
         </Switch>
-        
+
     </div>
   </Router>
 )

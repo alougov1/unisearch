@@ -23,19 +23,14 @@ var appRouter = function (app) {
   });
 
   app.get("/student", function (req, res) {
-    var firstName = "";
-    var lastName = "";
-    //continue this stuff
 
     //run this to
-    connection.query("SELECT * FROM studentAccount", function (err, result, fields) {
+    connection.query("SELECT * FROM studentAccount WHERE username='eanmcd'", function (err, result, fields) {
         if (err) throw err;
-        firstName = result;
+        console.log('asdfasdfasdfasdf');
+        console.log(result);
+        res.send(result);
       });
-    var data = ({
-      firstName: firstName
-    });
-    res.status(200).send(data);
   });
 }
 

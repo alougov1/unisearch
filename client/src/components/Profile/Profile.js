@@ -33,12 +33,9 @@ class Profile extends Component {
 
   componentDidMount() {
     fetch('/student')
-            .then(res => {
-                console.log(res);
-             })
-            .then(data => { 
-                console.log(data); 
-                this.setState({ data })
+            .then(res => res.json())
+            .then(jsonRes => {
+                this.setState({ firstName: jsonRes[0].username });
              });
   }
 
@@ -60,7 +57,7 @@ class Profile extends Component {
   render() {
   if (!this.state.isEditing) {
     return(
-      <div> 
+      <div>
         <Grid>
           <Row>
               <Col xs='3'>
@@ -104,8 +101,8 @@ class Profile extends Component {
                 Email
               </label>
             </Col>
-            <Col xs='8'>  
-              <p>{this.state.email}</p> 
+            <Col xs='8'>
+              <p>{this.state.email}</p>
             </Col>
           </Row>
 
@@ -128,7 +125,7 @@ class Profile extends Component {
                 ACT
               </label>
             </Col>
-            <Col xs='8'>          
+            <Col xs='8'>
               <p>{this.state.act}</p>
             </Col>
           </Row>
@@ -139,8 +136,8 @@ class Profile extends Component {
               <label htmlFor='sat'>
                 SAT
               </label>
-            </Col> 
-            <Col xs='8'>  
+            </Col>
+            <Col xs='8'>
               <p>{this.state.sat}</p>
             </Col>
           </Row>
@@ -164,7 +161,7 @@ class Profile extends Component {
                 Age
               </label>
             </Col>
-            <Col xs='8'>  
+            <Col xs='8'>
               <p>{this.state.age}</p>
             </Col>
           </Row>
@@ -238,7 +235,7 @@ class Profile extends Component {
                 Email
               </label>
             </Col>
-            <Col xs='8'>  
+            <Col xs='8'>
               <input type='text' value={this.state.email} onChange={this.handleChange} name='email' />
             </Col>
           </Row>
@@ -262,7 +259,7 @@ class Profile extends Component {
                 ACT
               </label>
             </Col>
-            <Col xs='8'>          
+            <Col xs='8'>
               <input type='text' value={this.state.act} onChange={this.handleChange} name='act' />
             </Col>
           </Row>
@@ -273,8 +270,8 @@ class Profile extends Component {
               <label htmlFor='sat'>
                 SAT
               </label>
-            </Col> 
-            <Col xs='8'>  
+            </Col>
+            <Col xs='8'>
               <input type='text' value={this.state.sat} onChange={this.handleChange} name='sat' />
             </Col>
           </Row>
@@ -298,7 +295,7 @@ class Profile extends Component {
                 Age
               </label>
             </Col>
-            <Col xs='8'>  
+            <Col xs='8'>
               <input type='text' value={this.state.age} onChange={this.handleChange} name='age' />
             </Col>
           </Row>
@@ -332,8 +329,3 @@ class Profile extends Component {
 
 
 export default Profile;
-
-
-
-
-

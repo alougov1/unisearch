@@ -13,8 +13,12 @@ export default class Login extends Component {
     };
   }
 
-  validateForm() {
+  emptyForm() {
     return this.state.username.length > 0 && this.state.password.length > 0;
+  }
+
+  validateForm() {
+
   }
 
   handleChange = event => {
@@ -54,7 +58,7 @@ export default class Login extends Component {
                         <Button
                             block
                             bsSize="large"
-                            disabled={!this.validateForm()}
+                            disabled={!this.emptyForm()}
                             type="submit">
                             Login
                         </Button>
