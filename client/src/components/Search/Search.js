@@ -25,18 +25,18 @@ class Search extends Component {
     return (
       <div className="uniSearch">
 
-        <form> 
+        <form>
           <input onChange={this.handleChange} />
         </form>
 
-        <div className="Table-container"> 
+        <div className="Table-container">
         <table className="Table">
-            <thead className="Table-head"> 
-                <tr> 
+            <thead className="Table-head">
+                <tr>
                     <th>Universities</th>
                 </tr>
             </thead>
-            <tbody className="Table-body"> { }
+            <tbody className="Table-body">
             </tbody>
         </table>
         </div>

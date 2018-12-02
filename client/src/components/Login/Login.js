@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 import { Grid, Row, Col, code} from 'react-bootstrap';
+import { Redirect } from 'react-router-dom'
 
 export default class Login extends Component {
   constructor(props) {
@@ -38,8 +39,23 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state.username);
-    console.log(this.state.password);
+    localStorage.setItem('currUser', this.state.username);
+    localStorage.setItem('currPass', this.state.password);
+    fetch("/validateUserLogin?un=" + this.state.username + "&pass=" + this.state.password)
+            .then(res => {
+                return res.json();
+              }
+            )
+            .then(jsonRes => {
+              console.log(jsonRes);
+              if (jsonRes === "true") {
+                //FIX THIS 
+                return <Redirect to='../search/search.js' />
+              }
+            })
+            .catch(error => {
+              alert("Incorrect username or password--please try again.");
+            })
   }
 
   render() {
@@ -90,6 +106,7 @@ export default class Login extends Component {
                               block
                               bsSize="large"
                               disabled={!this.emptyForm()}
+                              href="/components/Search/Search.js"
                               type="submit">
                               Create
                           </Button>
@@ -107,7 +124,7 @@ export default class Login extends Component {
                       Login
                   </Button>
                 </Col>
-              </Row>  
+              </Row>
           </Grid>
         </div>
       );
@@ -154,7 +171,7 @@ export default class Login extends Component {
                     Create an Account
                 </Button>
               </Col>
-            </Row>  
+            </Row>
         </Grid>
       </div>
     );

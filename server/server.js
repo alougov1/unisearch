@@ -31,3 +31,8 @@ var server = app.listen(3001, function () {
     console.log("app running on port.", server.address().port);
 });
 
+exports.getUserName = () => connection.query("SELECT username FROM studentAccount WHERE username='" +
+  localStorage.getItem('currUser') + "'", function (err, result, fields) {
+    if (err) throw err;
+    return result;
+  });
