@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "concurrently": "^3.0.0",
+    "concurrently": "^4.1.0",
     "mysql": "^2.16.0",
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.4",
@@ -30,7 +30,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "concurrently": "^4.1.0",
     "express": "^4.16.4"
   }
 }

@@ -48,7 +48,8 @@ export default class Login extends Component {
             )
             .then(jsonRes => {
               console.log(jsonRes);
-              if (jsonRes === "true") {
+              if (jsonRes) {
+                console.log('asdfasdfasdfasdf');
                 //FIX THIS 
                 return <Redirect to='../search/search.js' />
               }
