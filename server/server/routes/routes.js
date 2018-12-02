@@ -8,9 +8,8 @@ var connection = mysql.createConnection({
   database : 'unisearch'
 
 });
-var bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
+//var bodyParser = require('body-parser');
 
 connection.connect(function(err){
 if(!err) {
@@ -35,13 +34,20 @@ var appRouter = function (app) {
       });
   });
 
-  app.post("/student", (req, res) => {
-    //console.log(req.body);
-    console.log(res);
-    //db.collection('quotes').insertOne(req.body, (err, data) => {
-        //if(err) return console.log(err);
-        //res.send(('saved to db: ' + data));
-    //})
+  app.post("/studentUpdate", (req, res) => {
+    const currUser = req.query.un;
+    const email = req.query.email;
+    const act = req.query.act;
+    const sat = req.query.sat;
+    const gender = req.query.gender;
+    const age = req.query.age;
+    const hometown = req.query.hometown;
+    var sqlQuery = mysql.format('UPDATE studentAccount SET username=?, email=?, act=?, sat=?, gender=?, age=?, hometown=? WHERE username=?',
+    [currUser, email, act, sat, gender, age, hometown, currUser]);
+    connection.query(sqlQuery, function (err, result, fields) {
+        if (err) throw err;
+        res.sendStatus(200);
+      });
   });
 
 //validates login information
@@ -50,7 +56,7 @@ var appRouter = function (app) {
     const currentUser = req.query.un;
     const currPass = req.query.pass;
 
-    var sqlQuery = mysql.format('SELECT * FROM studentAccount WHERE username=?', [currentUser]);
+    var sqlQuery = mysql.format('SELECT * FROM studentAccount WHERE username=?;', [currentUser]);
     //ADD SOMETHING TO MAKE SURE THIS DOESN"T BREAK IF UNDEFINED PARAMS
     connection.query(sqlQuery, function(err, result, fields) {
       //MODIFY THIS TO BE MORE SOPHISTICATED ERROR HANDLING LATER

@@ -55,7 +55,8 @@ export default class Login extends Component {
               console.log(jsonRes);
               if (jsonRes) {
                 this.toggleAuthenticate()
-
+              } else {
+                alert("Incorrect username or password--please try again.");
               }
             })
             .catch(error => {

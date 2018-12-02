@@ -40,12 +40,12 @@ class Profile extends Component {
             .then(jsonRes => {
               console.log(jsonRes);
               this.setState({ firstName: jsonRes[0].username,
-                              email: jsonRes[0].email, 
+                              email: jsonRes[0].email,
                               gpa: jsonRes[0].gpa,
-                              act: jsonRes[0].act,  
-                              sat: jsonRes[0].sat, 
-                              gender: jsonRes[0].gender, 
-                              age: jsonRes[0].age, 
+                              act: jsonRes[0].act,
+                              sat: jsonRes[0].sat,
+                              gender: jsonRes[0].gender,
+                              age: jsonRes[0].age,
                               hometown: jsonRes[0].hometown,
                               username: jsonRes[0].username });
             })
@@ -59,6 +59,7 @@ class Profile extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
+    console.log(event.target.value);
 
   }
 
@@ -69,17 +70,20 @@ class Profile extends Component {
       "username": this.state.username,
       "gpa": this.state.gpa
     }
-    fetch('/student', {
+    fetch('/studentUpdate?un=' + localStorage.getItem('currUser') +
+    "&email=" + this.state.email + "&act=" + this.state.act +
+    "&sat=" + this.state.sat + "&gender=" + this.state.gender +
+    "&age=" + this.state.age + "&hometown=" + this.state.hometown, {
             method: 'POST',
-            body: JSON.stringify(databody),
+        //    body: JSON.stringify(databody),
             headers: {'Access-Control-Allow-Origin':'*',
             'Content-Type': 'multipart/form-data'}
         })
-        .then(res => res.json())
-        .then(data => console.log(data))
+        .then(this.toggleEdit())
         .catch(error => {
           alert("??");
-        }); 
+          console.log(error);
+        });
   }
 
   toggleEdit() {
@@ -200,7 +204,7 @@ class Profile extends Component {
             <Col xs='8'>
               <button onClick={this.toggleEdit}>edit</button>
             </Col>
-            
+
 
           </Row>
 
