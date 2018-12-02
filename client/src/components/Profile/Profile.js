@@ -13,10 +13,10 @@ class Profile extends Component {
     super(props)
     this.state = {
       isEditing: false,
-      firstName: 'Your first name' ,
+      firstName: localStorage.getItem('currUser'),
       lastName: 'Your last name' ,
       email:   'email',
-      username:   'Username',
+      username:   'alougov',
       password:'*******',
       gpa:  0.0,
       act:  '0',
@@ -32,14 +32,18 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    fetch('/student')
-            .then(res => res.json())
+    fetch("/student?un=" + localStorage.getItem('currUser'))
+            .then(res => {
+                return res.json();
+              }
+            )
             .then(jsonRes => {
-                this.setState({ firstName: jsonRes[0].username });
-             })
-             .catch( error => {
-                alert("Json Error");
-             });
+              console.log(jsonRes);
+              //this.setState({ firstName: jsonRes[0].username });
+            })
+            .catch(error => {
+              alert("Incorrect username or password--please try again.");
+            })
   }
 
   handleChange (event) {

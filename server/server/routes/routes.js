@@ -24,8 +24,9 @@ var appRouter = function (app) {
 
   app.get("/student", function (req, res) {
     //run this to get data about current user from DB
-    connection.query("SELECT * FROM studentAccount WHERE username='" + localStorage.getItem('currUser') + "'",
-    function (err, result, fields) {
+    const currentUser = req.query.un;
+    var sqlQuery = mysql.format('SELECT * FROM studentAccount WHERE username=?', [currentUser]);
+    connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
         res.send(result);
       });
