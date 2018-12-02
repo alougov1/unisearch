@@ -8,6 +8,9 @@ var connection = mysql.createConnection({
   database : 'unisearch'
 
 });
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 connection.connect(function(err){
 if(!err) {
@@ -30,6 +33,15 @@ var appRouter = function (app) {
         if (err) throw err;
         res.send(result);
       });
+  });
+
+  app.post("/student", (req, res) => {
+    //console.log(req.body);
+    console.log(res);
+    //db.collection('quotes').insertOne(req.body, (err, data) => {
+        //if(err) return console.log(err);
+        //res.send(('saved to db: ' + data));
+    //})
   });
 
 //validates login information

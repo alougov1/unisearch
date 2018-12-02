@@ -59,10 +59,27 @@ class Profile extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
+
   }
 
   handleSubmit (event) {
     event.preventDefault()
+    let databody = {
+      "email": this.state.email,
+      "username": this.state.username,
+      "gpa": this.state.gpa
+    }
+    fetch('/student', {
+            method: 'POST',
+            body: JSON.stringify(databody),
+            headers: {'Access-Control-Allow-Origin':'*',
+            'Content-Type': 'multipart/form-data'}
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error => {
+          alert("??");
+        }); 
   }
 
   toggleEdit() {
@@ -183,6 +200,7 @@ class Profile extends Component {
             <Col xs='8'>
               <button onClick={this.toggleEdit}>edit</button>
             </Col>
+            
 
           </Row>
 
@@ -193,11 +211,12 @@ class Profile extends Component {
 
     return (
       <Grid>
+        <Form onSubmit={this.handleSubmit}>
           <Row>
               <Col xs='2'>
               </Col>
               <Col xs='9' className="name">
-                NAME
+              {this.state.username}
               </Col>
           </Row>
 
@@ -205,23 +224,11 @@ class Profile extends Component {
             <Col xs='2' />
             <Col xs='2' className='fields'>
               <label htmlFor='firstName'>
-                First Name
+                Username
               </label>
             </Col>
             <Col xs='8'>
-              <input type='text' value={this.state.firstName} onChange={this.handleChange} name='firstName' />
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs='2' />
-            <Col xs='2'>
-              <label htmlFor='lastName'>
-                Last Name
-              </label>
-            </Col>
-            <Col xs='8'>
-              <input type='text' value={this.state.lastName} onChange={this.handleChange} name='lastName' />
+              <input type='text' value={this.state.username} onChange={this.handleChange} name='username' />
             </Col>
           </Row>
 
@@ -233,7 +240,7 @@ class Profile extends Component {
               </label>
             </Col>
             <Col xs='8'>
-              <input type='text' value={this.state.email} onChange={this.handleChange} name='email' />
+              <input type='text' value={this.state.email} onSubmit={this.handleSubmit} onChange={this.handleChange} name='email' />
             </Col>
           </Row>
 
@@ -311,11 +318,14 @@ class Profile extends Component {
 
           <Row>
             <Col xs='2' />
-            <Col xs='8'>
+            <Col xs='2'>
               <button onClick={this.toggleEdit}>edit</button>
             </Col>
+            <Col xs='6'>
+              <button type="submit">Submit</button>
+            </Col>
           </Row>
-
+        </Form>
       </Grid>
     );
     }
