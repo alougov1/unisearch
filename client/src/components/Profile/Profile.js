@@ -13,11 +13,11 @@ class Profile extends Component {
     super(props)
     this.state = {
       isEditing: false,
-      firstName: localStorage.getItem('currUser'),
-      lastName: 'Your last name' ,
-      email:   'email',
-      username:   'alougov',
-      password:'*******',
+      firstName: '',
+      lastName: '' ,
+      email:   '',
+      username:   '',
+      password:'',
       gpa:  0.0,
       act:  '0',
       sat:  '0',
@@ -39,7 +39,15 @@ class Profile extends Component {
             )
             .then(jsonRes => {
               console.log(jsonRes);
-              //this.setState({ firstName: jsonRes[0].username });
+              this.setState({ firstName: jsonRes[0].username,
+                              email: jsonRes[0].email, 
+                              gpa: jsonRes[0].gpa,
+                              act: jsonRes[0].act,  
+                              sat: jsonRes[0].sat, 
+                              gender: jsonRes[0].gender, 
+                              age: jsonRes[0].age, 
+                              hometown: jsonRes[0].hometown,
+                              username: jsonRes[0].username });
             })
             .catch(error => {
               alert("Incorrect username or password--please try again.");
@@ -67,13 +75,10 @@ class Profile extends Component {
       <div>
         <Grid>
           <Row>
-              <Col xs='3'>
-                <Media>
-                  <img width={120} height={120} src={imggg} />
-                </Media>
+              <Col xs='2'>
               </Col>
               <Col xs='9' className="name">
-                NAME
+                {this.state.username}
               </Col>
           </Row>
 
@@ -81,23 +86,11 @@ class Profile extends Component {
             <Col xs='2' />
             <Col xs='2' className='fields'>
               <label htmlFor='firstName'>
-                First Name
+                Username
               </label>
             </Col>
             <Col xs='8'>
-              <p>{this.state.firstName}</p>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs='2' />
-            <Col xs='2'>
-              <label htmlFor='lastName'>
-                Last Name
-              </label>
-            </Col>
-            <Col xs='8'>
-              {this.state.lastName}
+              <p>{this.state.username}</p>
             </Col>
           </Row>
 
@@ -201,10 +194,7 @@ class Profile extends Component {
     return (
       <Grid>
           <Row>
-              <Col xs='3'>
-                <Media>
-                  <img width={120} height={120} src={imggg} />
-                </Media>
+              <Col xs='2'>
               </Col>
               <Col xs='9' className="name">
                 NAME
