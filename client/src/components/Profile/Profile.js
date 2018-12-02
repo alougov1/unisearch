@@ -68,14 +68,14 @@ class Profile extends Component {
     let databody = {
       "email": this.state.email,
       "username": this.state.username,
-      "gpa": this.state.gpa
+      "gpa": this.state.gpa,
     }
     fetch('/studentUpdate?un=' + localStorage.getItem('currUser') +
-    "&email=" + this.state.email + "&act=" + this.state.act +
-    "&sat=" + this.state.sat + "&gender=" + this.state.gender +
+    "&email=" + this.state.email + "&act=" + this.state.act + 
+    "&sat=" + this.state.sat + "&gpa=" + this.state.gpa + "&gender=" + this.state.gender +
     "&age=" + this.state.age + "&hometown=" + this.state.hometown, {
             method: 'POST',
-        //    body: JSON.stringify(databody),
+            body: JSON.stringify(databody),
             headers: {'Access-Control-Allow-Origin':'*',
             'Content-Type': 'multipart/form-data'}
         })

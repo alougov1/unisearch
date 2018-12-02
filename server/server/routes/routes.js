@@ -39,11 +39,12 @@ var appRouter = function (app) {
     const email = req.query.email;
     const act = req.query.act;
     const sat = req.query.sat;
+    const gpa = req.query.gpa;
     const gender = req.query.gender;
     const age = req.query.age;
     const hometown = req.query.hometown;
-    var sqlQuery = mysql.format('UPDATE studentAccount SET username=?, email=?, act=?, sat=?, gender=?, age=?, hometown=? WHERE username=?',
-    [currUser, email, act, sat, gender, age, hometown, currUser]);
+    var sqlQuery = mysql.format('UPDATE studentAccount SET username=?, email=?, act=?, sat=?, gpa=?, gender=?, age=?, hometown=? WHERE username=?',
+    [currUser, email, act, sat, gpa, gender, age, hometown, currUser]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
         res.sendStatus(200);
