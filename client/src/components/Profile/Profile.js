@@ -36,6 +36,9 @@ class Profile extends Component {
             .then(res => res.json())
             .then(jsonRes => {
                 this.setState({ firstName: jsonRes[0].username });
+             })
+             .catch( error => {
+                alert("Json Error");
              });
   }
 

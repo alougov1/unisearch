@@ -15,6 +15,7 @@ export default class Login extends Component {
       firstname: "",
       lastname: "",
       creatingAcc: false,
+      authenticated: false,
     };
     this.toggleCreate = this.toggleCreate.bind(this);
   }
@@ -29,6 +30,10 @@ export default class Login extends Component {
 
   validateForm() {
 
+  }
+
+  toggleAuthenticate() {
+    this.setState({authenticated: !this.state.authenticated})
   }
 
   handleChange = event => {
@@ -49,9 +54,8 @@ export default class Login extends Component {
             .then(jsonRes => {
               console.log(jsonRes);
               if (jsonRes) {
-                console.log('asdfasdfasdfasdf');
-                //FIX THIS 
-                return <Redirect to='../search/search.js' />
+                this.toggleAuthenticate()
+
               }
             })
             .catch(error => {
@@ -60,6 +64,9 @@ export default class Login extends Component {
   }
 
   render() {
+    if(this.state.authenticated) {
+      return <Redirect to='/components/Search/Search.js' />
+    }
     if(this.state.creatingAcc) {
       return(
           <div className="container">
