@@ -36,18 +36,39 @@ var appRouter = function (app) {
 
   app.post("/studentUpdate", (req, res) => {
     const currUser = req.query.un;
-    const email = req.query.email;
     const act = req.query.act;
     const sat = req.query.sat;
     const gpa = req.query.gpa;
     const gender = req.query.gender;
     const age = req.query.age;
     const hometown = req.query.hometown;
-    var sqlQuery = mysql.format('UPDATE studentAccount SET username=?, email=?, act=?, sat=?, gpa=?, gender=?, age=?, hometown=? WHERE username=?',
-    [currUser, email, act, sat, gpa, gender, age, hometown, currUser]);
+    var sqlQuery = mysql.format('UPDATE studentAccount SET username=?, act=?, sat=?, gpa=?, gender=?, age=?, hometown=? WHERE username=?',
+    [currUser, act, sat, gpa, gender, age, hometown, currUser]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
         res.sendStatus(200);
+      });
+  });
+
+  app.post("/studentEmailUpdate", (req, res) => {
+    const currUser = req.query.un;
+    const email = req.query.email;
+    var sqlQuery = mysql.format('UPDATE studentAccount SET username=?, email=? WHERE username=?',
+    [currUser, email, currUser]);
+    connection.query(sqlQuery, function (err, result, fields) {
+        if (err) throw err;
+        res.sendStatus(200);
+      });
+  });
+
+  app.get("/university", function (req, res) {
+    //run this to get data about current user from DB
+    const currentUser = req.query.un;
+    var sqlQuery = mysql.format('SELECT * FROM university WHERE uni_name=?', [currentUser]);
+    connection.query(sqlQuery, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+        res.send(result);
       });
   });
 

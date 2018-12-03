@@ -15,7 +15,6 @@ class Profile extends Component {
       isEditing: false,
       firstName: '',
       lastName: '' ,
-      email:   '',
       username:   '',
       password:'',
       gpa:  0.0,
@@ -40,7 +39,6 @@ class Profile extends Component {
             .then(jsonRes => {
               console.log(jsonRes);
               this.setState({ firstName: jsonRes[0].username,
-                              email: jsonRes[0].email,
                               gpa: jsonRes[0].gpa,
                               act: jsonRes[0].act,
                               sat: jsonRes[0].sat,
@@ -65,17 +63,11 @@ class Profile extends Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    let databody = {
-      "email": this.state.email,
-      "username": this.state.username,
-      "gpa": this.state.gpa,
-    }
     fetch('/studentUpdate?un=' + localStorage.getItem('currUser') +
-    "&email=" + this.state.email + "&act=" + this.state.act + 
+    "&act=" + this.state.act + 
     "&sat=" + this.state.sat + "&gpa=" + this.state.gpa + "&gender=" + this.state.gender +
     "&age=" + this.state.age + "&hometown=" + this.state.hometown, {
             method: 'POST',
-            body: JSON.stringify(databody),
             headers: {'Access-Control-Allow-Origin':'*',
             'Content-Type': 'multipart/form-data'}
         })
@@ -112,18 +104,6 @@ class Profile extends Component {
             </Col>
             <Col xs='8'>
               <p>{this.state.username}</p>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs='2' />
-            <Col xs='2'>
-              <label htmlFor='email'>
-                Email
-              </label>
-            </Col>
-            <Col xs='8'>
-              <p>{this.state.email}</p>
             </Col>
           </Row>
 
@@ -233,18 +213,6 @@ class Profile extends Component {
             </Col>
             <Col xs='8'>
               <input type='text' value={this.state.username} onChange={this.handleChange} name='username' />
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs='2' />
-            <Col xs='2'>
-              <label htmlFor='email'>
-                Email
-              </label>
-            </Col>
-            <Col xs='8'>
-              <input type='text' value={this.state.email} onSubmit={this.handleSubmit} onChange={this.handleChange} name='email' />
             </Col>
           </Row>
 

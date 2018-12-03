@@ -9,7 +9,7 @@ class Settings extends Component {
     super(props)
     this.state = {
       isEditing: false,
-      email:   'aaaaaaaa',
+      email: '',
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -24,8 +24,34 @@ class Settings extends Component {
 
   }
 
+  componentDidMount() {
+    fetch("/student?un=" + localStorage.getItem('currUser'))
+            .then(res => {
+                return res.json();
+              }
+            )
+            .then(jsonRes => {
+              console.log(jsonRes);
+              this.setState({ email: jsonRes[0].email});
+            })
+            .catch(error => {
+              alert("Incorrect username or password--please try again.");
+            })
+  }
+
   handleSubmit (event) {
     event.preventDefault()
+    fetch('/studentEmailUpdate?un=' + localStorage.getItem('currUser') +
+    "&email=" + this.state.email, {
+            method: 'POST',
+            headers: {'Access-Control-Allow-Origin':'*',
+            'Content-Type': 'multipart/form-data'}
+        })
+        .then(this.toggleEdit())
+        .catch(error => {
+          alert("??");
+          console.log(error);
+        });
   }
 
   toggleEdit() {
@@ -46,14 +72,18 @@ class Settings extends Component {
                   Email
               </label>
             </Col>
+            <Form onSubmit={this.handleSubmit}>
             <Col>
-              <Form>
                 <input type='text' value={this.state.email} onChange={this.handleChange} name='email' />
-              </Form>
+              
             </Col>
             <Col>
               <button onClick={this.toggleEdit}>edit</button>
             </Col>
+            <Col>
+              <button type="submit">Submit</button>
+            </Col>
+            </Form>
           </Row>
 
           <Row>
