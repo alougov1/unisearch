@@ -24,12 +24,10 @@ class Search extends Component {
   refreshUnis() {
     fetch("/university?un=" + this.state.searchQuery)
             .then(res => {
-              console.log(res);
                 return res.json();
               }
             )
             .then(jsonRes => {
-              console.log(jsonRes);
               this.setState({
                 universities: jsonRes
               });
@@ -41,12 +39,12 @@ class Search extends Component {
 
   handleChange = event => {
     this.setState({ searchQuery: event.target.value }, () => {
-      console.log(this.state.searchQuery)
       this.refreshUnis();
     })
   }
 
   render() {
+    const unis = this.state.universities.map(uni => <tr key={uni}>{uni}</tr> );
     return (
       <div className="uniSearch">
         <Grid>
@@ -62,15 +60,8 @@ class Search extends Component {
                       <th>Universities</th>
                     </tr>
                   </thead>
-                <tbody className="Table-body">{this.state.universities.map((universities) => (
-                    <tr key={universities.value}>
-                      <td key="section1">
-                        console.log(universities.value);
-                        <span key={"section1"} className="table-names">{universities.value}</span>
-                      </td>
-                  </tr>
-                  ))}
-
+                <tbody className="Table-body">
+                  {unis}
                 </tbody>
                </table>
               </div>
