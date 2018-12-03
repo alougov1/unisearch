@@ -30,7 +30,7 @@ class Search extends Component {
             )
             .then(jsonRes => {
               console.log(jsonRes);
-              this.setState({ 
+              this.setState({
                 universities: jsonRes
               });
             })
@@ -39,11 +39,11 @@ class Search extends Component {
             })
   }
 
-  handleChange(event) {
-    const inputValue = event.target.value;
-    this.setState({ searchQuery: inputValue })
-    console.log(this.state.searchQuery)
-    this.refreshUnis();
+  handleChange = event => {
+    this.setState({ searchQuery: event.target.value }, () => {
+      console.log(this.state.searchQuery)
+      this.refreshUnis();
+    })
   }
 
   render() {
@@ -62,16 +62,15 @@ class Search extends Component {
                       <th>Universities</th>
                     </tr>
                   </thead>
-                <tbody className="Table-body"> {
-                  this.state.universities.map((universities) => (
-                    <tr key={universities.value}> 
+                <tbody className="Table-body">{this.state.universities.map((universities) => (
+                    <tr key={universities.value}>
                       <td key="section1">
                         console.log(universities.value);
                         <span key={"section1"} className="table-names">{universities.value}</span>
-                      </td>  
+                      </td>
                   </tr>
                   ))}
-                  
+
                 </tbody>
                </table>
               </div>
