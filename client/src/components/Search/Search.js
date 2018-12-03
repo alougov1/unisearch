@@ -61,23 +61,29 @@ class Search extends Component {
             })
             .catch(error => {
               alert("Incorrect username or password--please try again.");
-            })        
+            })
   }
 
   handleChange = event => {
-    this.setState({ searchQuery: event.target.value }, () => {
+    console.log(event.target.value);
+    this.setState({ searchQuery: event.target.innerHTML }, () => {
       this.refreshUnis();
     })
   }
 
+  handleUniClick = event => {
+    console.log(event.target.value);
+    this.setState({ selectedUni: event.target.value });
+  }
+
   render() {
     let uninames = this.state.universities.map(uni => uni.uni_name);
-    let unis = uninames.map(uni => <li key={uni}>{uni}</li> );
+    let unis = uninames.map(uniname => <li key={uniname} onClick={this.handleUniClick.bind(this)}>{uniname}</li> );
     return (
       <div className="uniSearch">
         <Grid>
           <Row>
-          </Row> 
+          </Row>
           <Row>
             <Col xs='4'>
               <form>
@@ -90,9 +96,12 @@ class Search extends Component {
                 </ul>
               </div>
             </Col>
-               
-            <Col xs='4'>
 
+            <Col xs='4'>
+                <p>{this.state.selectedUni} Info</p>
+                <ul>
+                  <li></li>
+                </ul>
             </Col>
 
             <Col xs='4'>
@@ -105,8 +114,8 @@ class Search extends Component {
                 <li>{this.state.gender}</li>
                 <li>{this.state.age}</li>
                 <li>{this.state.hometown}</li>
-                
-              </ul> 
+
+              </ul>
             </Col>
           </Row>
         </Grid>

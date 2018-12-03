@@ -102,7 +102,9 @@ export default class Login extends Component {
     event.preventDefault();
     if (this.validateNewAcctForm()) {
     fetch("/createAcct?un=" + this.state.username + "&pass=" + this.state.password +
-  "&email=" + this.state.email + "&fname=" + this.state.firstname + "&lname=" + this.state.lastname, {
+  "&email=" + encodeURI(this.state.email) + "&gpa=" + this.state.gpa + "&act=" + this.state.act
+  + "&sat=" + this.state.sat
+  + "&gender=" + this.state.gender + "&hometown=" + this.state.hometown + "&age=" + this.state.age, {
           method: 'POST',
           headers: {'Access-Control-Allow-Origin':'*',
           'Content-Type': 'multipart/form-data'}
@@ -117,6 +119,7 @@ export default class Login extends Component {
       })
       .catch(error => {
         alert("Invalid inputs--please try again.")
+        console.log(error);
       })
     }
   }
