@@ -11,6 +11,14 @@ class Search extends Component {
     this.state = {
       searchQuery: '',
       universities: [],
+      selectedUni: '',
+      username: '',
+      gpa:  0.0,
+      act:  '0',
+      sat:  '0',
+      gender: '',
+      age:  0,
+      hometown: '',
 
     }
 
@@ -35,6 +43,25 @@ class Search extends Component {
             .catch(error => {
               alert("Incorrect username or password--please try again.");
             })
+
+  fetch("/student?un=" + localStorage.getItem('currUser'))
+            .then(res => {
+                return res.json();
+              }
+            )
+            .then(jsonRes => {
+              console.log(jsonRes);
+              this.setState({ gpa: jsonRes[0].gpa,
+                              act: jsonRes[0].act,
+                              sat: jsonRes[0].sat,
+                              gender: jsonRes[0].gender,
+                              age: jsonRes[0].age,
+                              hometown: jsonRes[0].hometown,
+                              username: jsonRes[0].username });
+            })
+            .catch(error => {
+              alert("Incorrect username or password--please try again.");
+            })        
   }
 
   handleChange = event => {
@@ -50,7 +77,9 @@ class Search extends Component {
       <div className="uniSearch">
         <Grid>
           <Row>
-            <Col>
+          </Row> 
+          <Row>
+            <Col xs='4'>
               <form>
                 <input onChange={this.handleChange} />
               </form>
@@ -60,6 +89,24 @@ class Search extends Component {
                   {unis}
                 </ul>
               </div>
+            </Col>
+               
+            <Col xs='4'>
+
+            </Col>
+
+            <Col xs='4'>
+              <p>{this.state.username}'s Info</p>
+              <ul>
+                <li>{this.state.username}</li>
+                <li>{this.state.gpa}</li>
+                <li>{this.state.act}</li>
+                <li>{this.state.sat}</li>
+                <li>{this.state.gender}</li>
+                <li>{this.state.age}</li>
+                <li>{this.state.hometown}</li>
+                
+              </ul> 
             </Col>
           </Row>
         </Grid>
