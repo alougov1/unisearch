@@ -34,6 +34,26 @@ var appRouter = function (app) {
       });
   });
 
+  app.get("/personOfInterest", function (req, res) {
+    //run this to get data about current user from DB
+    const currentPerson = req.query.un;
+    var sqlQuery = mysql.format('SELECT * FROM personOfInterest WHERE p_name=?', [currentPerson]);
+    connection.query(sqlQuery, function (err, result, fields) {
+        if (err) throw err;
+        res.send(result);
+      });
+  });
+
+  app.get("/uniList", function (req, res) {
+    //run this to get data about current user from DB
+    const currentUser = req.query.un;
+    var sqlQuery = mysql.format('SELECT * FROM studentUniList WHERE username=?', [currentUser]);
+    connection.query(sqlQuery, function (err, result, fields) {
+        if (err) throw err;
+        res.send(result);
+      });
+  });
+
   app.post("/studentUpdate", (req, res) => {
     const currUser = req.query.un;
     const act = req.query.act;

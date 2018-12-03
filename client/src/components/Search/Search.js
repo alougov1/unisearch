@@ -61,7 +61,7 @@ class Search extends Component {
             })
             .catch(error => {
               alert("Incorrect username or password--please try again.");
-            })
+            })       
   }
 
   handleChange = event => {

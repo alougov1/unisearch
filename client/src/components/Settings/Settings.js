@@ -59,7 +59,7 @@ class Settings extends Component {
   }
 
   render() {
-    if(!this.state.isEditing) {
+    if(this.state.isEditing) {
       return (
         <div>
         <Grid>
@@ -95,7 +95,7 @@ class Settings extends Component {
         </Grid>
       </div>
       )
-    }
+    } else {
     return (
       <div>
         <Grid>
@@ -125,7 +125,7 @@ class Settings extends Component {
         </Grid>
       </div>
     );
-  }
+  }}
 }
 
 export default Settings;

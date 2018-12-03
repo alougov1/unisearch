@@ -9,6 +9,7 @@ import Search from './components/Search/Search';
 import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Settings';
 import Login from './components/Login/Login';
+import People from './components/People/People';
 
 const routing = (
   <Router>
@@ -21,6 +22,7 @@ const routing = (
             <Route path="/components/Profile/Profile.js" component={Profile} />
             <Route path="/components/Settings/Settings.js" component={Settings} />
             <Route path="/components/Login/Login.js" component={Login} />
+            <Route path="/components/People/People.js" component={People} />
         </Switch>
 
     </div>

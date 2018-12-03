@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { FormGroup, Form, Row, Col, FormControl, Button,
   ControlLabel, HelpBlock, Glyphicon, DropdownButton, MenuItem, Image,
   Media, Grid, } from 'react-bootstrap';
-import imggg from './listtt.png';
 import './People.css';
 import PropTypes from 'prop-types';
 
@@ -18,13 +17,29 @@ class People extends Component {
       gender: '',
       age: '',
       university: '',
-
-
     }
-
   }
 
+  componentDidMount() {
+    localStorage.setItem('currPerson', "Joseph Aoun")
 
+    fetch("/personOfInterest?un=" + localStorage.getItem('currPerson'))
+            .then(res => {
+                return res.json();
+              }
+            )
+            .then(jsonRes => {
+              console.log(jsonRes);
+              this.setState({ name: jsonRes[0].p_name,
+                              jobTitle: jsonRes[0].job_title,
+                              gender: jsonRes[0].gender,
+                              age: jsonRes[0].age, 
+                              university: jsonRes[0].university,});
+            })
+            .catch(error => {
+              alert("Incorrect username or password--please try again.");
+            })
+  }
 
   render() {
     return(
@@ -34,55 +49,31 @@ class People extends Component {
               <Col xs='2'>
               </Col>
               <Col xs='9' className="name">
-                {this.state.username}
+                {this.state.name}
+              </Col>
+          </Row>
+
+            <Row>
+              <Col xs='2' />
+              <Col xs='2'>
+                <label htmlFor='university'>
+                  University
+                </label>
+              </Col>
+              <Col xs='8'>
+                <p>{this.state.university}</p>
               </Col>
           </Row>
 
           <Row>
             <Col xs='2' />
-            <Col xs='2' className='fields'>
-              <label htmlFor='firstName'>
-                Username
-              </label>
-            </Col>
-            <Col xs='8'>
-              <p>{this.state.username}</p>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs='2' />
             <Col xs='2'>
-              <label htmlFor='gpa'>
-                GPA
+              <label htmlFor='jobtitle'>
+                Job Title
               </label>
             </Col>
             <Col xs='8'>
-              <p>{this.state.gpa}</p>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs='2' />
-            <Col xs='2'>
-              <label htmlFor='act'>
-                ACT
-              </label>
-            </Col>
-            <Col xs='8'>
-              <p>{this.state.act}</p>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs='2' />
-            <Col xs='2'>
-              <label htmlFor='sat'>
-                SAT
-              </label>
-            </Col>
-            <Col xs='8'>
-              <p>{this.state.sat}</p>
+              <p>{this.state.jobTitle}</p>
             </Col>
           </Row>
 
@@ -108,27 +99,6 @@ class People extends Component {
             <Col xs='8'>
               <p>{this.state.age}</p>
             </Col>
-          </Row>
-
-          <Row>
-            <Col xs='2' />
-            <Col xs='2'>
-              <label htmlFor='hometown'>
-                Hometown
-              </label>
-            </Col>
-            <Col xs='8'>
-              <p>{this.state.hometown}</p>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs='2' />
-            <Col xs='8'>
-              <button onClick={this.toggleEdit}>edit</button>
-            </Col>
-
-
           </Row>
 
       </Grid>

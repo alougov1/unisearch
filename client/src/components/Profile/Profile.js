@@ -23,7 +23,7 @@ class Profile extends Component {
       gender:   '',
       age:  0,
       hometown:   '',
-      data: [],
+      unis: []
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -50,6 +50,21 @@ class Profile extends Component {
             .catch(error => {
               alert("Incorrect username or password--please try again.");
             })
+
+    fetch("/uniList?un=" + localStorage.getItem('currUser'))
+            .then(res => {
+                return res.json();
+              }
+            )
+            .then(jsonRes => {
+              console.log(jsonRes);
+              this.setState({ 
+                unis: jsonRes
+              });
+            })
+            .catch(error => {
+              alert("Incorrect username or password--please try again.");
+            })          
   }
 
   handleChange (event) {
@@ -82,6 +97,8 @@ class Profile extends Component {
   }
 
   render() {
+    let uninames = this.state.unis.map(uni => uni.uni_name);
+    let unis = uninames.map(uniname => <li key={uniname}> {uniname} </li> );
   if (!this.state.isEditing) {
     return(
       <div>
@@ -183,9 +200,17 @@ class Profile extends Component {
             <Col xs='8'>
               <button onClick={this.toggleEdit}>edit</button>
             </Col>
-
-
           </Row>
+
+          <Row>
+          <Col xs='2' />
+          <Col xs='8'>
+            <p>{this.state.username}'s University List</p>
+            <ul>
+              <li>{unis}</li>
+            </ul>
+          </Col>  
+          </Row> 
 
       </Grid>
       </div>
@@ -296,6 +321,17 @@ class Profile extends Component {
               <button type="submit">Submit</button>
             </Col>
           </Row>
+
+          <Row>
+          <Col xs='2' />
+          <Col xs='8'>
+            <p>{this.state.username}'s University List</p>
+            <ul>
+              <li>{unis}</li>
+              <li><input type='text' value={unis.key} onChange={this.handleChange} name='uni1' /></li>
+            </ul>
+          </Col>  
+          </Row> 
         </Form>
       </Grid>
     );
