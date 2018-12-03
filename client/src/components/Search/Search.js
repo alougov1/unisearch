@@ -44,7 +44,8 @@ class Search extends Component {
   }
 
   render() {
-    const unis = this.state.universities.map(uni => <tr key={uni}>{uni}</tr> );
+    let uninames = this.state.universities.map(uni => uni.uni_name);
+    const unis = uninames.map(uni => <li key={uni}>{uni}</li> );
     return (
       <div className="uniSearch">
         <Grid>
@@ -54,16 +55,10 @@ class Search extends Component {
                 <input onChange={this.handleChange} />
               </form>
               <div className="Table-container">
-              <table className="Table">
-                <thead className="Table-head">
-                    <tr>
-                      <th>Universities</th>
-                    </tr>
-                  </thead>
-                <tbody className="Table-body">
+                <p>Universities</p>
+                <ul>
                   {unis}
-                </tbody>
-               </table>
+                </ul>
               </div>
             </Col>
           </Row>
