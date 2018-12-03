@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "concurrently": "^4.1.0",
+    "email-validator": "^2.0.4",
     "mysql": "^2.16.0",
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.4",

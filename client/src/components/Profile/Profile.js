@@ -64,7 +64,7 @@ class Profile extends Component {
   handleSubmit (event) {
     event.preventDefault()
     fetch('/studentUpdate?un=' + localStorage.getItem('currUser') +
-    "&act=" + this.state.act + 
+    "&act=" + this.state.act +
     "&sat=" + this.state.sat + "&gpa=" + this.state.gpa + "&gender=" + this.state.gender +
     "&age=" + this.state.age + "&hometown=" + this.state.hometown, {
             method: 'POST',
@@ -73,8 +73,7 @@ class Profile extends Component {
         })
         .then(this.toggleEdit())
         .catch(error => {
-          alert("??");
-          console.log(error);
+          alert("Invalid inputs--try again.");
         });
   }
 

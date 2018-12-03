@@ -50,6 +50,27 @@ var appRouter = function (app) {
       });
   });
 
+  //create account
+  app.post("/createAcct", (req, res) => {
+    const username = req.query.un;
+    const pass = req.query.pass;
+    const email = req.query.email;
+    const hometown = null;
+    const gpa = null;
+    const act = null;
+    const sat = null;
+    const gender = null;
+    const age = null;
+
+    var sqlQuery = mysql.format('INSERT INTO studentAccount (username, student_pass, gpa, act, sat, gender, age, hometown, email)' +
+    'VALUES ?, ?, ?, ?, ?, ?, ?, ?, ?',
+    [username, pass, gpa, act, sat, gender, age, hometown, email]);
+    connection.query(sqlQuery, function (err, result, fields) {
+        if (err) throw err;
+        res.sendStatus(200);
+      });
+  });
+
   app.post("/studentEmailUpdate", (req, res) => {
     const currUser = req.query.un;
     const email = req.query.email;
@@ -78,7 +99,7 @@ var appRouter = function (app) {
     const currentUser = req.query.un;
     const currPass = req.query.pass;
 
-    var sqlQuery = mysql.format('SELECT * FROM studentAccount WHERE username=?;', [currentUser]);
+    var sqlQuery = mysql.format('SELECT * FROM studentAccount WHERE username=?', [currentUser]);
     //ADD SOMETHING TO MAKE SURE THIS DOESN"T BREAK IF UNDEFINED PARAMS
     connection.query(sqlQuery, function(err, result, fields) {
       //MODIFY THIS TO BE MORE SOPHISTICATED ERROR HANDLING LATER
