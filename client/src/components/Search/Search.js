@@ -45,7 +45,7 @@ class Search extends Component {
 
   render() {
     let uninames = this.state.universities.map(uni => uni.uni_name);
-    const unis = uninames.map(uni => <li key={uni}>{uni}</li> );
+    let unis = uninames.map(uni => <li key={uni}>{uni}</li> );
     return (
       <div className="uniSearch">
         <Grid>

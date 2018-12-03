@@ -84,21 +84,22 @@ var appRouter = function (app) {
 
   app.get("/university", function (req, res) {
     //run this to get data about current user from DB
-    const currentUser = req.query.un;
-    if (currentUser = '') {
+    let currentUni = req.query.un;
+    if (currentUni.length < 1) {
       var sqlQuery1 = mysql.format('SELECT * FROM university');
       connection.query(sqlQuery1, function (err, result, fields) {
         if (err) throw err;
         console.log(result);
         res.send(result);
       });
-    }
-    var sqlQuery = mysql.format('SELECT * FROM university WHERE uni_name=?', [currentUser]);
-    connection.query(sqlQuery, function (err, result, fields) {
-        if (err) throw err;
-        console.log(result);
-        res.send(result);
-      });
+    } else {
+      var sqlQuery = mysql.format('SELECT * FROM university WHERE uni_name=?', [currentUni]);
+      connection.query(sqlQuery, function (err, result, fields) {
+          if (err) throw err;
+          console.log(result);
+          res.send(result);
+        });
+      }
   });
 
 //validates login information
