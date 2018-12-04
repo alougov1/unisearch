@@ -41,7 +41,7 @@ class Search extends Component {
               });
             })
             .catch(error => {
-              alert("Incorrect username or password--please try again.");
+              alert("Something went wrong--give us a moment.");
             })
 
   fetch("/student?un=" + localStorage.getItem('currUser'))
@@ -60,25 +60,41 @@ class Search extends Component {
                               username: jsonRes[0].username });
             })
             .catch(error => {
-              alert("Incorrect username or password--please try again.");
-            })       
+              alert("Something went wrong when fetching your profile--give us a moment.");
+            })
   }
 
   handleChange = event => {
-    console.log(event.target.value);
-    this.setState({ searchQuery: event.target.innerHTML }, () => {
+    this.setState({ searchQuery: event.target.value }, () => {
       this.refreshUnis();
     })
   }
 
   handleUniClick = event => {
-    console.log(event.target.value);
-    this.setState({ selectedUni: event.target.value });
+    this.setState({ selectedUni: event.target.textContent });
   }
 
   render() {
     let uninames = this.state.universities.map(uni => uni.uni_name);
-    let unis = uninames.map(uniname => <li key={uniname} onClick={this.handleUniClick.bind(this)}>{uniname}</li> );
+    let unis = uninames.map(uniname => <li key={uniname} onClick={this.handleUniClick}>{uniname}</li> );
+    //selected university
+    let selected = this.state.universities.find(e => e.uni_name === this.state.selectedUni);
+    let uniInfo = <ul></ul>
+    if (selected !== undefined) {
+      uniInfo = <ul key={selected.uni_name}>
+          <li>Location: {selected.location}</li>
+          <li>Avg Admitted GPA: {selected.gpa_avg}</li>
+          <li>Avg ACT: {selected.act}</li>
+          <li>Avg SAT: {selected.sat}</li>
+          <li>Number of Students: {selected.num_students}</li>
+          <li>Mascot: {selected.mascot}</li>
+          <li>Number of Dining Halls: {selected.num_dining_halls}</li>
+          <li>Acceptance Rate: {selected.accpt_rate}</li>
+          <li>Athletic Conference: {selected.athletic_conf}</li>
+          <li>Number of Colleges: {selected.num_colleges}</li>
+          <li>Graduation Rate: {selected.grad_rate}</li>
+        </ul>
+      }
     return (
       <div className="uniSearch">
         <Grid>
@@ -98,10 +114,8 @@ class Search extends Component {
             </Col>
 
             <Col xs='4'>
-                <p>{this.state.selectedUni} Info</p>
-                <ul>
-                  <li></li>
-                </ul>
+                <p>{this.state.selectedUni}</p>
+                {uniInfo}
             </Col>
 
             <Col xs='4'>
