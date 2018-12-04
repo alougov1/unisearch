@@ -102,7 +102,7 @@ export default class Login extends Component {
     event.preventDefault();
     if (this.validateNewAcctForm()) {
     fetch("/createAcct?un=" + this.state.username + "&pass=" + this.state.password +
-  "&email=" + encodeURI(this.state.email) + "&gpa=" + this.state.gpa + "&act=" + this.state.act
+  "&email=" + encodeURIComponent(this.state.email) + "&gpa=" + this.state.gpa + "&act=" + this.state.act
   + "&sat=" + this.state.sat
   + "&gender=" + this.state.gender + "&hometown=" + this.state.hometown + "&age=" + this.state.age, {
           method: 'POST',
@@ -110,7 +110,8 @@ export default class Login extends Component {
           'Content-Type': 'multipart/form-data'}
       })
       .then(res => {
-          return res.json();
+        //only return res here--res is already being return as a JSON object, no need to parse it again.
+          return res;
         })
       .then(jsonRes => {
         if (jsonRes) {

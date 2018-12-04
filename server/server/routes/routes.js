@@ -83,7 +83,7 @@ var appRouter = function (app) {
   app.post("/createAcct", (req, res) => {
     const username = req.query.un;
     const pass = req.query.pass;
-    const email = decodeURI(req.query.email);
+    const email = decodeURIComponent(req.query.email);
     const hometown = req.query.hometown;
     const gpa = req.query.gpa;
     const act = req.query.act;
@@ -91,8 +91,8 @@ var appRouter = function (app) {
     const gender = req.query.gender;
     const age = req.query.age;
 
-    var sqlQuery = mysql.format('INSERT INTO studentAccount (username, student_pass, gpa, act, sat, gender, age, hometown, email)' +
-    'VALUES ?, ?, ?, ?, ?, ?, ?, ?, ?',
+    var sqlQuery = mysql.format('INSERT INTO studentAccount (username, student_pass, gpa, act, sat, gender, age, hometown, email) ' +
+    'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
     [username, pass, gpa, act, sat, gender, age, hometown, email]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
