@@ -12,7 +12,6 @@ class Profile extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      deleteQuery: '',
       isEditing: false,
       username:   '',
       password:'',
@@ -22,11 +21,13 @@ class Profile extends Component {
       gender:   '',
       age:  0,
       hometown:   '',
-      unis: []
+      unis: [],
+      deleteQuery: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleEdit = this.toggleEdit.bind(this)
+    this.deleteUniList = this.deleteUniList.bind(this)
     
   }
 
@@ -68,8 +69,9 @@ class Profile extends Component {
   }
 
   deleteUniList() {
-    fetch("/UniListDelete?un=" + localStorage.getItem('currUser') + "&uni=" + this.state.deleteQuery)
+    fetch("/uniListDelete?un=" + localStorage.getItem('currUser') + "&uni=" + this.state.deleteQuery)
             .then(res => {
+
               })
             .catch(error => {
               alert("");
@@ -216,7 +218,7 @@ class Profile extends Component {
           <Col xs='8'>
             <p>{this.state.username}'s University List</p>
             <ul>
-              <li>{unis}</li>
+              {unis}
             </ul>
           </Col>  
           </Row> 
@@ -337,12 +339,12 @@ class Profile extends Component {
           <Col xs='8'>
             <p>{this.state.username}'s University List</p>
             <ul>
-              <li>{unis}</li>
+              {unis}
             </ul>
-              <Form>
+              <Form onSubmit={this.deleteUniList}>
               <p>Type the name of the University you wish to delete</p>
-              <input type='text' value={this.state.deleteQuery} onChange={this.handleChange} name='deleteUni' />
-              <button onClick={this.deleteUniList}>Delete</button>
+              <input type='text' value={this.state.deleteQuery} onChange={this.handleChange} name='deleteQuery' />
+              <button type="submit">Delete</button>
               </Form>
           </Col>  
           <Col>

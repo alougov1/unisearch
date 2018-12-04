@@ -58,10 +58,10 @@ var appRouter = function (app) {
     //run this to get data about current user from DB
     const currentUser = req.query.un;
     const uni = req.query.uni;
-    var sqlQuery = mysql.format('DELETE * FROM studentUniList WHERE uni=? AND username=?', [uni, currentUser]);
+    var sqlQuery = mysql.format('DELETE FROM studentUniList WHERE uni_name=? AND username=?', [uni, currentUser]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
-        res.send(result);
+        res.sendStatus(200);
       });
   });
 
@@ -83,7 +83,7 @@ var appRouter = function (app) {
 
   app.get("/studentDelete", (req, res) => {
     const currUser = req.query.un;
-    var sqlQuery = mysql.format('DELETE from studentAccount where username=?', [currUser]);
+    var sqlQuery = mysql.format('DELETE FROM studentAccount WHERE username=?', [currUser]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
         res.sendStatus(200);
