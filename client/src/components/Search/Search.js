@@ -13,6 +13,7 @@ class Search extends Component {
       universities: [],
       selectedUni: '',
       people: [],
+      schools: [],
       username: '',
       gpa:  0.0,
       act:  '0',
@@ -91,6 +92,19 @@ class Search extends Component {
             .catch(error => {
               alert("Incorrect username or password--please try again.");
     })  
+    fetch("/school" )
+            .then(res => {
+                console.log(this.state.selectedUni);
+                return res.json();
+              }
+            )
+            .then(jsonRes => {
+              this.setState({ schools: jsonRes });
+              console.log(jsonRes);
+            })
+            .catch(error => {
+              alert("Incorrect username or password--please try again.");
+})  
   }
 
   render() {
@@ -100,6 +114,9 @@ class Search extends Component {
 
     let peoplenames = this.state.people.map(ppl => ppl.p_name);
     let people = peoplenames.map(peoplename => <li key={peoplename} onClick={this.handlePeopleClick}>{peoplename}</li> );
+
+    let schoolnames = this.state.schools.map(sch => sch.school_name);
+    let schools = schoolnames.map(schoolname => <li key={schoolname} onClick={this.handleSchoolClick}>{schoolname}</li> );
 
     let selected = this.state.universities.find(e => e.uni_name === this.state.selectedUni);
     let uniInfo = <ul></ul>
@@ -141,6 +158,8 @@ class Search extends Component {
                 {uniInfo}
                 <p>People of Interest</p>
                 {people}
+                <p>Schools</p>
+                {schools}
             </Col>
 
             <Col xs='3'>
