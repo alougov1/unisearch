@@ -22,7 +22,8 @@ class Search extends Component {
       gender: '',
       age:  0,
       hometown: '',
-      schoolClicked: false
+      schoolClicked: false,
+      personClicked: false
 
     }
 
@@ -98,18 +99,26 @@ class Search extends Component {
             })
             .catch(error => {
               alert("Uh oh--something went wrong with getting school information.  Please try again.");
-})
-})
-}
+    })
+    })
+  } 
 
-handleSchoolClick = event => {
-  localStorage.setItem('currSchool', event.target.textContent);
-  this.setState({ schoolClicked: true});
-}
+  handleSchoolClick = event => {
+    localStorage.setItem('currSchool', event.target.textContent);
+    this.setState({ schoolClicked: true});
+  }
+
+  handlePeopleClick = event => {
+    localStorage.setItem('currPerson', event.target.textContent);
+    this.setState({ personClicked: true});
+  }
 
   render() {
     if(this.state.schoolClicked) {
       return <Redirect to='/components/School/School.js' />
+    }
+    if(this.state.personClicked) {
+      return <Redirect to='/components/People/People.js' />
     }
     let uninames = this.state.universities.map(uni => uni.uni_name);
     let unis = uninames.map(uniname => <li key={uniname} onClick={this.handleUniClick}>{uniname}</li> );

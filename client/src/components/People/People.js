@@ -4,6 +4,7 @@ import { FormGroup, Form, Row, Col, FormControl, Button,
   Media, Grid, } from 'react-bootstrap';
 import './People.css';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom'
 
 
 class People extends Component {
@@ -17,11 +18,11 @@ class People extends Component {
       gender: '',
       age: '',
       university: '',
+      backToSearch: false
     }
   }
 
   componentDidMount() {
-    localStorage.setItem('currPerson', "Joseph Aoun")
 
     fetch("/personOfInterest?un=" + localStorage.getItem('currPerson'))
             .then(res => {
@@ -41,7 +42,15 @@ class People extends Component {
             })
   }
 
+  handleBackClick = event => {
+    localStorage.setItem('currSchool', '');
+    this.setState({ backToSearch: true});
+  }
+
   render() {
+    if(this.state.backToSearch) {
+      return <Redirect to='/components/Search/Search.js' />
+    }
     return(
       <div>
         <Grid>
@@ -98,6 +107,15 @@ class People extends Component {
             </Col>
             <Col xs='8'>
               <p>{this.state.age}</p>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col xs='2' />
+            <Col xs='2'>
+            </Col>
+            <Col xs='8'>
+              <button onClick={this.handleBackClick}>Return to Search</button>
             </Col>
           </Row>
 

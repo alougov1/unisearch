@@ -4,7 +4,7 @@ import { FormGroup, Form, Row, Col, FormControl, Button,
   Media, Grid, } from 'react-bootstrap';
 import './School.css';
 import PropTypes from 'prop-types';
-
+import { Redirect } from 'react-router-dom'
 
 class School extends Component {
 
@@ -18,7 +18,8 @@ class School extends Component {
       act: 0 ,
       sat: 0 ,
       accpt_rate: 0.0 ,
-      grad_rate: 0.0 
+      grad_rate: 0.0,
+      backToSearch: false
     }
   }
 
@@ -46,7 +47,15 @@ class School extends Component {
             })
   }
 
+  handleBackClick = event => {
+    localStorage.setItem('currSchool', '');
+    this.setState({ backToSearch: true});
+  }
+
   render() {
+    if(this.state.backToSearch) {
+      return <Redirect to='/components/Search/Search.js' />
+    }
     return(
       <div>
         <Grid>
@@ -127,6 +136,15 @@ class School extends Component {
             </Col>
             <Col xs='8'>
               <p>{this.state.grad_rate}</p>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col xs='2' />
+            <Col xs='2'>
+            </Col>
+            <Col xs='8'>
+              <button onClick={this.handleBackClick}>Return to Search</button>
             </Col>
           </Row>
 
