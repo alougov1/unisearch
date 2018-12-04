@@ -44,10 +44,10 @@ var appRouter = function (app) {
       });
   });
 
+  //get people of interest for selected school
   app.get("/personOfInterestSelect", function (req, res) {
-    //run this to get data about current user from DB
-    //const uni = req.query.uni;
-    var sqlQuery = mysql.format('SELECT * FROM personOfInterest');
+    const uni = decodeURIComponent(req.query.uni);
+    var sqlQuery = mysql.format('SELECT * FROM personOfInterest WHERE university=?', [uni]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
         res.send(result);

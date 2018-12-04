@@ -9,8 +9,6 @@ class App extends Component {
     return (
 
       <div>
-      BLUETOOTH
-
       <Login />
       </div>
     );

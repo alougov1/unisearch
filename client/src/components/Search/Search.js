@@ -73,39 +73,31 @@ class Search extends Component {
   }
 
   handleUniClick = event => {
-    this.setState({ selectedUni: event.target.textContent }); 
-    console.log(this.state.selectedUni);
-    // up here selectedUni is nothing
-    fetch("/personOfInterestSelect" ) //still no value for the fetch call
+    this.setState({ selectedUni: event.target.textContent }, () => {
+    fetch("/personOfInterestSelect?uni=" + this.state.selectedUni)
             .then(res => {
-                // but once we are here it has a value....
-                console.log(this.state.selectedUni);
                 return res.json();
               }
             )
             .then(jsonRes => {
-              console.log("made it");
-              console.log(this.state.selectedUni);
               this.setState({ people: jsonRes });
-              console.log(jsonRes);
             })
             .catch(error => {
-              alert("Incorrect username or password--please try again.");
-    })  
+              alert("We're having trouble getting people of interest--please try again.");
+    })
     fetch("/school?uni=" + this.state.selectedUni)
             .then(res => {
-                console.log(this.state.selectedUni);
                 return res.json();
               }
             )
             .then(jsonRes => {
               this.setState({ schools: jsonRes });
-              console.log(jsonRes);
             })
             .catch(error => {
-              alert("Incorrect username or password--please try again.");
-})  
-  }
+              alert("Uh oh--something went wrong with getting school information.  Please try again.");
+})
+})
+}
 
   render() {
     let uninames = this.state.universities.map(uni => uni.uni_name);
