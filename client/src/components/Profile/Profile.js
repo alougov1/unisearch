@@ -72,11 +72,24 @@ class Profile extends Component {
   deleteUniList() {
     fetch("/uniListDelete?un=" + localStorage.getItem('currUser') + "&uni=" + this.state.deleteQuery)
             .then(res => {
-
               })
             .catch(error => {
               alert("");
             })
+  }
+
+  addUniList() {
+    console.log(localStorage.getItem('currUser'));
+    console.log(this.state.addQuery);
+    /*fetch('/uniListAdd?un=' + localStorage.getItem('currUser') +
+    "&uni=" + this.state.addQuery, {
+            method: 'POST',
+            headers: {'Access-Control-Allow-Origin':'*',
+            'Content-Type': 'multipart/form-data'}
+        })
+        .catch(error => {
+          alert("Invalid inputs--try again.");
+        }); */
   }
 
   handleChange (event) {
@@ -342,16 +355,19 @@ class Profile extends Component {
             <ul>
               {unis}
             </ul>
+
               <Form onSubmit={this.deleteUniList}>
               <p>Type the name of the University you wish to delete</p>
               <input type='text' value={this.state.deleteQuery} onChange={this.handleChange} name='deleteQuery' />
               <button type="submit">Delete</button>
               </Form>
+
               <Form onSubmit={this.addUniList}>
               <p>Type the name of the University you wish to add to your University list</p>
               <input type='text' value={this.state.addQuery} onChange={this.handleChange} name='addQuery' />
               <button type="submit">Add</button>
               </Form>
+              
           </Col>  
           <Col>
 

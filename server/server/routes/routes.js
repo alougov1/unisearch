@@ -74,6 +74,18 @@ var appRouter = function (app) {
       });
   });
 
+  app.post("/uniListAdd", (req, res) => {
+    const currUser = req.query.un;
+    const uni = req.query.uni;
+    const num = 5;
+    var sqlQuery = mysql.format('INSERT INTO studentUniList (username, uni_name, preferenceTowardsSchool) VALUES (?, ?, ?)',
+    [currUser, uni, num]);
+    connection.query(sqlQuery, function (err, result, fields) {
+        if (err) throw err;
+        res.sendStatus(200);
+      });
+  });
+
   app.get("/uniListDelete", function (req, res) {
     //run this to get data about current user from DB
     const currentUser = req.query.un;
