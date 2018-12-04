@@ -89,8 +89,7 @@ var appRouter = function (app) {
     const currUser = req.query.un;
     const uni = req.query.uni;
     const num = 5;
-    var sqlQuery = mysql.format('INSERT INTO studentUniList (username, uni_name, preferenceTowardsSchool) VALUES (?, ?, ?)',
-    [currUser, uni, num]);
+    var sqlQuery = mysql.format('CALL insert_uniList(?, ?)', [currUser, uni]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
         res.sendStatus(200);
@@ -101,7 +100,7 @@ var appRouter = function (app) {
     //run this to get data about current user from DB
     const currentUser = req.query.un;
     const uni = req.query.uni;
-    var sqlQuery = mysql.format('DELETE FROM studentUniList WHERE uni_name=? AND username=?', [uni, currentUser]);
+    var sqlQuery = mysql.format('CALL delete_uniList(?, ?)', [currentUser, uni]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
         res.sendStatus(200);
@@ -116,8 +115,8 @@ var appRouter = function (app) {
     const gender = req.query.gender;
     const age = req.query.age;
     const hometown = req.query.hometown;
-    var sqlQuery = mysql.format('UPDATE studentAccount SET username=?, act=?, sat=?, gpa=?, gender=?, age=?, hometown=? WHERE username=?',
-    [currUser, act, sat, gpa, gender, age, hometown, currUser]);
+    var sqlQuery = mysql.format('CALL update_studentAcc(?, ?, ?, ?, ?, ?, ?)',
+    [currUser, gpa, act, sat, gender, age, hometown]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
         res.sendStatus(200);
@@ -126,7 +125,7 @@ var appRouter = function (app) {
 
   app.get("/studentDelete", (req, res) => {
     const currUser = req.query.un;
-    var sqlQuery = mysql.format('DELETE FROM studentAccount WHERE username=?', [currUser]);
+    var sqlQuery = mysql.format('CALL delete_studentAcc(?)', [currUser]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
         res.sendStatus(200);
@@ -145,7 +144,7 @@ var appRouter = function (app) {
     const gender = req.query.gender;
     const age = req.query.age;
 
-    var sqlQuery = mysql.format('INSERT INTO studentAccount (username, student_pass, gpa, act, sat, gender, age, hometown, email) ' +
+    var sqlQuery = mysql.format('CALL create_studentAcc(username, student_pass, gpa, act, sat, gender, age, hometown, email) ' +
     'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
     [username, pass, gpa, act, sat, gender, age, hometown, email]);
     connection.query(sqlQuery, function (err, result, fields) {
@@ -157,8 +156,8 @@ var appRouter = function (app) {
   app.post("/studentEmailUpdate", (req, res) => {
     const currUser = req.query.un;
     const email = req.query.email;
-    var sqlQuery = mysql.format('UPDATE studentAccount SET username=?, email=? WHERE username=?',
-    [currUser, email, currUser]);
+    var sqlQuery = mysql.format('CALL update_studnetEmail(?, ?)',
+    [currUser, email]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
         res.sendStatus(200);
