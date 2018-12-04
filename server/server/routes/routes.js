@@ -70,6 +70,15 @@ var appRouter = function (app) {
       });
   });
 
+  app.get("/studentDelete", (req, res) => {
+    const currUser = req.query.un;
+    var sqlQuery = mysql.format('DELETE from studentAccount where username=?', [currUser]);
+    connection.query(sqlQuery, function (err, result, fields) {
+        if (err) throw err;
+        res.sendStatus(200);
+      });
+  });
+
   //create account
   app.post("/createAcct", (req, res) => {
     const username = req.query.un;

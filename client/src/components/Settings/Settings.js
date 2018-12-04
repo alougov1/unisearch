@@ -39,6 +39,20 @@ class Settings extends Component {
             })
   }
 
+  deleteAccSSS() {
+    fetch("/studentDelete?un=" + localStorage.getItem('currUser'))
+            .then(res => {
+                return res.json();
+              }
+            )
+            .then(jsonRes => {
+              console.log(jsonRes);
+            })
+            .catch(error => {
+              alert("Incorrect username or password--please try again.");
+            })
+  }
+
   handleSubmit (event) {
     event.preventDefault()
     fetch('/studentEmailUpdate?un=' + localStorage.getItem('currUser') +
@@ -90,7 +104,7 @@ class Settings extends Component {
             
           </Row>
           <Row>
-            <button>Delete Your Account</button>
+            <button onClick={this.deleteAcc}>Delete Your Account</button>
           </Row>
         </Grid>
       </div>
