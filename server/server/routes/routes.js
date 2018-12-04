@@ -46,8 +46,8 @@ var appRouter = function (app) {
 
   app.get("/personOfInterestSelect", function (req, res) {
     //run this to get data about current user from DB
-    const uni = req.query.uni;
-    var sqlQuery = mysql.format('SELECT * FROM personOfInterest WHERE university=?', [uni]);
+    //const uni = req.query.uni;
+    var sqlQuery = mysql.format('SELECT * FROM personOfInterest');
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
         res.send(result);

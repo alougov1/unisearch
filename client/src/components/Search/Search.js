@@ -72,11 +72,10 @@ class Search extends Component {
   }
 
   handleUniClick = event => {
-    this.setState({ selectedUni: event.target.textContent });
-    console.log(this.state.selectedUni);
+    this.setState({ selectedUni: event.target.textContent }); 
     console.log(this.state.selectedUni);
     // up here selectedUni is nothing
-    fetch("/personOfInterestSelect?uni=" + this.state.selectedUni ) //still no value for the fetch call
+    fetch("/personOfInterestSelect" ) //still no value for the fetch call
             .then(res => {
                 // but once we are here it has a value....
                 console.log(this.state.selectedUni);
@@ -99,9 +98,9 @@ class Search extends Component {
     let unis = uninames.map(uniname => <li key={uniname} onClick={this.handleUniClick}>{uniname}</li> );
     //selected university
 
-    //let peoplenames = this.state.people.map(ppl => ppl.ppl_name);
-    //console.log(peoplenames);
-    //let people = peoplenames.map(peoplename => <li key={peoplename} onClick={this.handlepeopleClick}>{peoplename}</li> );
+    let peoplenames = this.state.people.map(ppl => ppl.p_name);
+    let people = peoplenames.map(peoplename => <li key={peoplename} onClick={this.handlePeopleClick}>{peoplename}</li> );
+
     let selected = this.state.universities.find(e => e.uni_name === this.state.selectedUni);
     let uniInfo = <ul></ul>
     if (selected !== undefined) {
@@ -137,12 +136,14 @@ class Search extends Component {
               </div>
             </Col>
 
-            <Col xs='4'>
+            <Col xs='5'>
                 <p>{this.state.selectedUni}</p>
                 {uniInfo}
+                <p>People of Interest</p>
+                {people}
             </Col>
 
-            <Col xs='4'>
+            <Col xs='3'>
               <p>{this.state.username}'s Info</p>
               <ul>
                 <li>{this.state.username}</li>
