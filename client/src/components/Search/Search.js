@@ -12,6 +12,7 @@ class Search extends Component {
       searchQuery: '',
       universities: [],
       selectedUni: '',
+      people: [],
       username: '',
       gpa:  0.0,
       act:  '0',
@@ -72,12 +73,35 @@ class Search extends Component {
 
   handleUniClick = event => {
     this.setState({ selectedUni: event.target.textContent });
+    console.log(this.state.selectedUni);
+    console.log(this.state.selectedUni);
+    // up here selectedUni is nothing
+    fetch("/personOfInterestSelect?uni=" + this.state.selectedUni ) //still no value for the fetch call
+            .then(res => {
+                // but once we are here it has a value....
+                console.log(this.state.selectedUni);
+                return res.json();
+              }
+            )
+            .then(jsonRes => {
+              console.log("made it");
+              console.log(this.state.selectedUni);
+              this.setState({ people: jsonRes });
+              console.log(jsonRes);
+            })
+            .catch(error => {
+              alert("Incorrect username or password--please try again.");
+    })  
   }
 
   render() {
     let uninames = this.state.universities.map(uni => uni.uni_name);
     let unis = uninames.map(uniname => <li key={uniname} onClick={this.handleUniClick}>{uniname}</li> );
     //selected university
+
+    //let peoplenames = this.state.people.map(ppl => ppl.ppl_name);
+    //console.log(peoplenames);
+    //let people = peoplenames.map(peoplename => <li key={peoplename} onClick={this.handlepeopleClick}>{peoplename}</li> );
     let selected = this.state.universities.find(e => e.uni_name === this.state.selectedUni);
     let uniInfo = <ul></ul>
     if (selected !== undefined) {
