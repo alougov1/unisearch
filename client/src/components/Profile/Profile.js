@@ -70,16 +70,21 @@ class Profile extends Component {
   }
 
   deleteUniList() {
-    fetch("/uniListDelete?un=" + localStorage.getItem('currUser') + "&uni=" + this.state.deleteQuery)
-            .then(res => {
-              })
-            .catch(error => {
-              alert("");
-            })
+    fetch('/uniListDelete?un=' + localStorage.getItem('currUser') +
+            "&uni=" + this.state.deleteQuery, {
+                    method: 'POST',
+                    headers: {'Access-Control-Allow-Origin':'*',
+                    'Content-Type': 'multipart/form-data'}
+                })
+                .then(res => {
+                  alert("asdf");
+                })
+                .catch(error => {
+                  alert("");
+                });         
   }
 
   addUniList() {
-
     fetch('/uniListAdd?un=' + localStorage.getItem('currUser') +
     "&uni=" + this.state.addQuery, {
             method: 'POST',

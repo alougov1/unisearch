@@ -3,6 +3,7 @@ import './Search.css';
 import { FormGroup, Form, Row, Col, FormControl, Button,
   ControlLabel, HelpBlock, Glyphicon, DropdownButton, MenuItem, Image,
   Media, Grid, } from 'react-bootstrap';
+  import { Redirect } from 'react-router-dom'
 
 class Search extends Component {
   constructor() {
@@ -21,6 +22,7 @@ class Search extends Component {
       gender: '',
       age:  0,
       hometown: '',
+      schoolClicked: false
 
     }
 
@@ -74,6 +76,7 @@ class Search extends Component {
 
   handleUniClick = event => {
     this.setState({ selectedUni: event.target.textContent }, () => {
+    localStorage.setItem('currUniversity', this.state.selectedUni);
     fetch("/personOfInterestSelect?uni=" + this.state.selectedUni)
             .then(res => {
                 return res.json();
@@ -99,7 +102,15 @@ class Search extends Component {
 })
 }
 
+handleSchoolClick = event => {
+  localStorage.setItem('currSchool', event.target.textContent);
+  this.setState({ schoolClicked: true});
+}
+
   render() {
+    if(this.state.schoolClicked) {
+      return <Redirect to='/components/School/School.js' />
+    }
     let uninames = this.state.universities.map(uni => uni.uni_name);
     let unis = uninames.map(uniname => <li key={uniname} onClick={this.handleUniClick}>{uniname}</li> );
     //selected university

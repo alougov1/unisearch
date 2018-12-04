@@ -74,6 +74,17 @@ var appRouter = function (app) {
       });
   });
 
+  app.get("/schoolInfo", function (req, res) {
+    //run this to get data about current user from DB
+    const uni = req.query.uni;
+    const school = req.query.sch;
+    var sqlQuery = mysql.format('SELECT * FROM school WHERE uni_name=? AND school_name=?', [uni, school]);
+    connection.query(sqlQuery, function (err, result, fields) {
+        if (err) throw err;
+        res.send(result);
+      });
+  });
+
   app.post("/uniListAdd", (req, res) => {
     const currUser = req.query.un;
     const uni = req.query.uni;
@@ -86,7 +97,7 @@ var appRouter = function (app) {
       });
   });
 
-  app.get("/uniListDelete", function (req, res) {
+  app.post("/uniListDelete", function (req, res) {
     //run this to get data about current user from DB
     const currentUser = req.query.un;
     const uni = req.query.uni;
