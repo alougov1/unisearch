@@ -29,7 +29,7 @@ class Profile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleEdit = this.toggleEdit.bind(this)
     this.deleteUniList = this.deleteUniList.bind(this)
-    
+    this.addUniList = this.addUniList.bind(this)
   }
 
   componentDidMount() {
@@ -79,17 +79,16 @@ class Profile extends Component {
   }
 
   addUniList() {
-    console.log(localStorage.getItem('currUser'));
-    console.log(this.state.addQuery);
-    /*fetch('/uniListAdd?un=' + localStorage.getItem('currUser') +
+
+    fetch('/uniListAdd?un=' + localStorage.getItem('currUser') +
     "&uni=" + this.state.addQuery, {
             method: 'POST',
             headers: {'Access-Control-Allow-Origin':'*',
             'Content-Type': 'multipart/form-data'}
         })
         .catch(error => {
-          alert("Invalid inputs--try again.");
-        }); */
+          alert("");
+        }); 
   }
 
   handleChange (event) {
@@ -355,7 +354,7 @@ class Profile extends Component {
             <ul>
               {unis}
             </ul>
-
+            
               <Form onSubmit={this.deleteUniList}>
               <p>Type the name of the University you wish to delete</p>
               <input type='text' value={this.state.deleteQuery} onChange={this.handleChange} name='deleteQuery' />
@@ -367,7 +366,6 @@ class Profile extends Component {
               <input type='text' value={this.state.addQuery} onChange={this.handleChange} name='addQuery' />
               <button type="submit">Add</button>
               </Form>
-              
           </Col>  
           <Col>
 
