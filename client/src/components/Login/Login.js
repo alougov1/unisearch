@@ -115,12 +115,12 @@ export default class Login extends Component {
         })
       .then(jsonRes => {
         if (jsonRes) {
+          localStorage.setItem('currUser', this.state.username);
           this.toggleAuthenticate()
         }
       })
       .catch(error => {
         alert("Invalid inputs--please try again.")
-        console.log(error);
       })
     }
   }

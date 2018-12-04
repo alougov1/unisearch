@@ -12,9 +12,8 @@ class Profile extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      deleteQuery: '',
       isEditing: false,
-      firstName: '',
-      lastName: '' ,
       username:   '',
       password:'',
       gpa:  0.0,
@@ -28,6 +27,7 @@ class Profile extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleEdit = this.toggleEdit.bind(this)
+    
   }
 
   componentDidMount() {
@@ -38,7 +38,7 @@ class Profile extends Component {
             )
             .then(jsonRes => {
               console.log(jsonRes);
-              this.setState({ firstName: jsonRes[0].username,
+              this.setState({
                               gpa: jsonRes[0].gpa,
                               act: jsonRes[0].act,
                               sat: jsonRes[0].sat,
@@ -67,12 +67,21 @@ class Profile extends Component {
             })          
   }
 
+  deleteUniList() {
+    fetch("/UniListDelete?un=" + localStorage.getItem('currUser') + "&uni=" + this.state.deleteQuery)
+            .then(res => {
+              })
+            .catch(error => {
+              alert("");
+            })
+  }
+
   handleChange (event) {
     event.preventDefault()
+    console.log(event.target.value);
     this.setState({
       [event.target.name]: event.target.value
     })
-    console.log(event.target.value);
 
   }
 
@@ -321,6 +330,7 @@ class Profile extends Component {
               <button type="submit">Submit</button>
             </Col>
           </Row>
+        </Form>  
 
           <Row>
           <Col xs='2' />
@@ -328,11 +338,17 @@ class Profile extends Component {
             <p>{this.state.username}'s University List</p>
             <ul>
               <li>{unis}</li>
-              <li><input type='text' value={unis.key} onChange={this.handleChange} name='uni1' /></li>
             </ul>
+              <Form>
+              <p>Type the name of the University you wish to delete</p>
+              <input type='text' value={this.state.deleteQuery} onChange={this.handleChange} name='deleteUni' />
+              <button onClick={this.deleteUniList}>Delete</button>
+              </Form>
           </Col>  
+          <Col>
+
+          </Col>
           </Row> 
-        </Form>
       </Grid>
     );
     }

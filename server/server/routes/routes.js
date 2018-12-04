@@ -54,6 +54,17 @@ var appRouter = function (app) {
       });
   });
 
+  app.get("/uniListDelete", function (req, res) {
+    //run this to get data about current user from DB
+    const currentUser = req.query.un;
+    const uni = req.query.uni;
+    var sqlQuery = mysql.format('DELETE * FROM studentUniList WHERE uni=? AND username=?', [uni, currentUser]);
+    connection.query(sqlQuery, function (err, result, fields) {
+        if (err) throw err;
+        res.send(result);
+      });
+  });
+
   app.post("/studentUpdate", (req, res) => {
     const currUser = req.query.un;
     const act = req.query.act;
