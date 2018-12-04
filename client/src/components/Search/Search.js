@@ -92,7 +92,7 @@ class Search extends Component {
             .catch(error => {
               alert("Incorrect username or password--please try again.");
     })  
-    fetch("/school" )
+    fetch("/school?uni=" + this.state.selectedUni)
             .then(res => {
                 console.log(this.state.selectedUni);
                 return res.json();

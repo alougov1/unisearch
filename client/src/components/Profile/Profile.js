@@ -22,7 +22,8 @@ class Profile extends Component {
       age:  0,
       hometown:   '',
       unis: [],
-      deleteQuery: ''
+      deleteQuery: '',
+      addQuery: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -345,6 +346,11 @@ class Profile extends Component {
               <p>Type the name of the University you wish to delete</p>
               <input type='text' value={this.state.deleteQuery} onChange={this.handleChange} name='deleteQuery' />
               <button type="submit">Delete</button>
+              </Form>
+              <Form onSubmit={this.addUniList}>
+              <p>Type the name of the University you wish to add to your University list</p>
+              <input type='text' value={this.state.addQuery} onChange={this.handleChange} name='addQuery' />
+              <button type="submit">Add</button>
               </Form>
           </Col>  
           <Col>
