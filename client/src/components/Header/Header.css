@@ -1,5 +1,12 @@
+
+
 .Head{
-    font-size: 32px;
+    font-size: 31px;
+}
+
+.Header {
+    background-color: #efd9c1;
+    font-family: 'Poppins', sans-serif;
 }
 
 
