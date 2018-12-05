@@ -5,8 +5,12 @@
 }
 
 .Header {
-    background-color: #efd9c1;
+    background-color: white;
     font-family: 'Poppins', sans-serif;
+}
+
+.Header a {
+    text-decoration-line: none;
 }
 
 

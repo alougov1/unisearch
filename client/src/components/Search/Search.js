@@ -165,6 +165,7 @@ class Search extends Component {
             </Col>
 
             <Col xs='5'>
+                <p className='uniheader'>Selected University:</p>
                 <p>{this.state.selectedUni}</p>
                 {uniInfo}
                 <p>People of Interest</p>

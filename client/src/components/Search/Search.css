@@ -1,0 +1,50 @@
+.Table-container {
+    margin-top:10px;
+}
+
+.row {
+    background-color:white;
+}
+
+ul {
+    list-style:none;
+    padding-left:0px;
+}
+
+li {
+    list-style: none;
+    padding:5px;
+    margin:0;
+    background-color:white;
+    list-style-position: unset;
+}
+
+li:hover {
+    background-color: #93a5c1;
+    color:white;
+}
+
+.col-xs-4 {
+    background-color:white;
+    padding-top: 15px;
+}
+
+.col-xs-5 {
+    background-color:white;
+    padding-top: 15px;
+}
+
+.col-xs-3 {
+    background-color:white;
+    padding-top: 15px;
+}
+
+.col-xs-3 li:hover{
+    background-color:white;
+    color:black;
+}
+
+input {
+    border-style: solid;
+    border-color: black;
+}
