@@ -41,6 +41,7 @@ class Settings extends Component {
   }
 
   toggleDeleted() {
+    localStorage.setItem('authenticated', 'false');
     this.setState({ isDeleted: true });
   }
 
@@ -75,7 +76,7 @@ class Settings extends Component {
 
   render() {
     if (this.state.isDeleted) {
-      return <Redirect to='/components/Login/Login.js' />;
+      return <Redirect to='/' />;
     }
     if (this.state.isEditing) {
       return (

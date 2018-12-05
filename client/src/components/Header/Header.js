@@ -10,6 +10,7 @@ const Header = () => {
                     <a href="/">University Comparer</a>
                 </Navbar.Header>
 
+                { localStorage.getItem('authenticated') === 'true' &&
                 <Nav pullRight>
                     <NavItem href="/components/Search/Search.js">
                         Search
@@ -21,6 +22,7 @@ const Header = () => {
                         Settings
                     </NavItem>
                 </Nav>
+              }
             </Navbar>
         </div>
     );

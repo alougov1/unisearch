@@ -33,6 +33,7 @@ export default class Login extends Component {
   }
 
   toggleAuthenticate() {
+    localStorage.setItem('authenticated', 'true');
     this.setState({authenticated: !this.state.authenticated})
   }
 
@@ -132,17 +133,12 @@ export default class Login extends Component {
   }
 
   render() {
-    let { isNotAuth } = !this.state.authenticated;
-    if(this.state.authenticated) {
+    if(this.state.authenticated && localStorage.getItem('authenticated') === 'true') {
       return <Redirect to='/components/Search/Search.js' />
     }
     if(this.state.creatingAcc) {
       return(
           <div className="container">
-          <Prompt
-            when={ isNotAuth }
-            message="Please log in to move on."
-          />
           <Grid>
               <Row>
                   <Col>
@@ -245,10 +241,6 @@ export default class Login extends Component {
     }
     return (
         <div className="container">
-        <Prompt
-          when={ isNotAuth }
-          message="Please log in to move on."
-        />
         <Grid>
             <Row>
                 <Col>
