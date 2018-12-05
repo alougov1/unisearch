@@ -76,6 +76,7 @@ class Profile extends Component {
                     'Content-Type': 'multipart/form-data'}
                 })
                 .then(res => {
+                  return res;
                 })
                 .catch(error => {
                   console.log(error);
@@ -90,9 +91,12 @@ class Profile extends Component {
             headers: {'Access-Control-Allow-Origin':'*',
             'Content-Type': 'multipart/form-data'}
         })
+        .then(res => {
+          return res;
+        })
         .catch(error => {
           console.log(error);
-          alert("Error adding university");
+        //  alert("Error adding university");
         });
   }
 
@@ -117,7 +121,7 @@ class Profile extends Component {
         })
         .then(this.toggleEdit())
         .catch(error => {
-          alert("Invalid inputs--try again.");
+        //  alert("Invalid inputs--try again.");
         });
   }
 
