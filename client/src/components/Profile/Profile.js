@@ -39,7 +39,6 @@ class Profile extends Component {
               }
             )
             .then(jsonRes => {
-              console.log(jsonRes);
               this.setState({
                               gpa: jsonRes[0].gpa,
                               act: jsonRes[0].act,
@@ -60,13 +59,13 @@ class Profile extends Component {
             )
             .then(jsonRes => {
               console.log(jsonRes);
-              this.setState({ 
+              this.setState({
                 unis: jsonRes
               });
             })
             .catch(error => {
               alert("Incorrect username or password--please try again.");
-            })          
+            })
   }
 
   deleteUniList() {
@@ -77,11 +76,11 @@ class Profile extends Component {
                     'Content-Type': 'multipart/form-data'}
                 })
                 .then(res => {
-                  alert("asdf");
                 })
                 .catch(error => {
-                  alert("");
-                });         
+                  console.log(error);
+                  alert("Error deleting university");
+                });
   }
 
   addUniList() {
@@ -92,8 +91,9 @@ class Profile extends Component {
             'Content-Type': 'multipart/form-data'}
         })
         .catch(error => {
-          alert("");
-        }); 
+          console.log(error);
+          alert("Error adding university");
+        });
   }
 
   handleChange (event) {
@@ -238,8 +238,8 @@ class Profile extends Component {
             <ul>
               {unis}
             </ul>
-          </Col>  
-          </Row> 
+          </Col>
+          </Row>
 
       </Grid>
       </div>
@@ -350,7 +350,7 @@ class Profile extends Component {
               <button type="submit">Submit</button>
             </Col>
           </Row>
-        </Form>  
+        </Form>
 
           <Row>
           <Col xs='2' />
@@ -359,7 +359,7 @@ class Profile extends Component {
             <ul>
               {unis}
             </ul>
-            
+
               <Form onSubmit={this.deleteUniList}>
               <p>Type the name of the University you wish to delete</p>
               <input type='text' value={this.state.deleteQuery} onChange={this.handleChange} name='deleteQuery' />
@@ -371,11 +371,11 @@ class Profile extends Component {
               <input type='text' value={this.state.addQuery} onChange={this.handleChange} name='addQuery' />
               <button type="submit">Add</button>
               </Form>
-          </Col>  
+          </Col>
           <Col>
 
           </Col>
-          </Row> 
+          </Row>
       </Grid>
     );
     }

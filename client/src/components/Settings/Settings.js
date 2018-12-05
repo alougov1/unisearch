@@ -46,16 +46,18 @@ class Settings extends Component {
   }
 
   deleteAcc (event) {
-    event.preventDefault();
-    fetch("/studentDelete?un=" + localStorage.getItem('currUser'))
-            .then(this.toggleDeleted())
-            .catch(error => {
-              console.log(error);
-              alert("We couldn't delete this account--uh oh.");
-            })
+      event.preventDefault();
+      fetch("/studentDelete?un=" + localStorage.getItem('currUser'))
+              .then(this.toggleDeleted())
+              .catch(error => {
+                console.log(error);
+                alert("We couldn't delete this account--uh oh.");
+              })
   }
 
   handleSubmit (event) {
+    var validator = require("email-validator");
+    if (validator.validate(this.state.email) && this.state.email.length <= 40) {
     event.preventDefault();
     fetch('/studentEmailUpdate?un=' + localStorage.getItem('currUser') +
     "&email=" + this.state.email, {
@@ -68,7 +70,10 @@ class Settings extends Component {
           alert("Problem submitting email--please try again.");
           console.log(error);
         });
+  } else {
+    alert("Invalid email--please try again.")
   }
+}
 
   toggleEdit() {
     this.setState({isEditing: !this.state.isEditing});
