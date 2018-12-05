@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Row, Col, Grid, } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import './Settings.css';
 
 class Settings extends Component {
 

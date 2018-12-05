@@ -38,7 +38,7 @@ class People extends Component {
                               university: jsonRes[0].university,});
             })
             .catch(error => {
-              alert("Incorrect username or password--please try again.");
+              alert("Error fetching data for this person--please try again.");
             })
   }
 
