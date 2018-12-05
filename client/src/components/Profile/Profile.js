@@ -271,7 +271,7 @@ class Profile extends Component {
           <Col xs='2' />
           <Col xs='8'>
             <p className='pleaseBold'>{this.state.username}'s University List</p>
-            <ul>
+            <ul className='unis'>
               {unis}
             </ul>
           </Col>
@@ -392,7 +392,7 @@ class Profile extends Component {
           <Col xs='2' />
           <Col xs='8'>
             <p className='pleaseBold'>{this.state.username}'s University List</p>
-            <ul>
+            <ul className='unis'>
               {unis}
             </ul>
 

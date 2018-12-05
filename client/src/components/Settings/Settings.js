@@ -42,7 +42,7 @@ class Settings extends Component {
   }
 
   toggleDeleted() {
-    localStorage.setItem('authenticated', 'false');
+    sessionStorage.setItem('authenticated', 'false');
     this.setState({ isDeleted: true });
   }
 

@@ -33,8 +33,8 @@ export default class Login extends Component {
   }
 
   toggleAuthenticate() {
-    localStorage.setItem('authenticated', 'true');
-    this.setState({authenticated: !this.state.authenticated})
+    sessionStorage.setItem('authenticated', 'true');
+    this.setState({authenticated: !this.state.authenticated});
   }
 
   handleChange = event => {
@@ -93,8 +93,8 @@ export default class Login extends Component {
               }
             )
             .then(jsonRes => {
-              console.log(jsonRes);
               if (jsonRes) {
+                localStorage.setItem('currUser', this.state.username);
                 this.toggleAuthenticate()
               } else {
                 alert("Incorrect username or password--please try again.");
@@ -133,7 +133,7 @@ export default class Login extends Component {
   }
 
   render() {
-    if(this.state.authenticated && localStorage.getItem('authenticated') === 'true') {
+    if(this.state.authenticated && sessionStorage.getItem('authenticated') === 'true') {
       return <Redirect to='/components/Search/Search.js' />
     }
     if(this.state.creatingAcc) {

@@ -7,10 +7,10 @@ const Header = () => {
         <div>
             <Navbar className="Header">
                 <Navbar.Header className="Head">
-                    <a href="/">University Comparer</a>
+                    <a href="/">UniSearch</a>
                 </Navbar.Header>
 
-                { localStorage.getItem('authenticated') === 'true' &&
+                { sessionStorage.getItem('authenticated') === 'true' &&
                 <Nav pullRight>
                     <NavItem href="/components/Search/Search.js">
                         Search
