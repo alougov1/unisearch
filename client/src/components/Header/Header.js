@@ -1,17 +1,16 @@
 import React from 'react';
 import './Header.css';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 
 const Header = () => {
-    return( 
+    return(
         <div>
-
-            <Navbar className="Header"> 
-                <Navbar.Header className="Head"> 
+            <Navbar className="Header">
+                <Navbar.Header className="Head">
                     <a href="/">University Comparer</a>
                 </Navbar.Header>
 
+                { localStorage.getItem('authenticated') === 'true' &&
                 <Nav pullRight>
                     <NavItem href="/components/Search/Search.js">
                         Search
@@ -23,9 +22,8 @@ const Header = () => {
                         Settings
                     </NavItem>
                 </Nav>
+              }
             </Navbar>
-
-        
         </div>
     );
 }

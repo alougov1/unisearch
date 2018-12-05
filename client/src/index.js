@@ -19,12 +19,23 @@ const routing = (
 
         <Switch>
             <Route exact path="/" component={App} />
+            { localStorage.getItem('authenticated') === 'true' &&
             <Route path="/components/Search/Search.js" component={Search} />
+          }
+          { localStorage.getItem('authenticated') === 'true' &&
             <Route path="/components/Profile/Profile.js" component={Profile} />
+          }
+          { localStorage.getItem('authenticated') === 'true' &&
             <Route path="/components/Settings/Settings.js" component={Settings} />
+          }
             <Route path="/components/Login/Login.js" component={Login} />
+            { localStorage.getItem('authenticated') === 'true' &&
             <Route path="/components/People/People.js" component={People} />
+          }
+          { localStorage.getItem('authenticated') === 'true' &&
             <Route path="/components/School/School.js" component={School} />
+          }
+          }
         </Switch>
 
     </div>

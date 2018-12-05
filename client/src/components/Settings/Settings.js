@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { FormGroup, Form, Row, Col, FormControl, Button,
-  ControlLabel, HelpBlock, Glyphicon, DropdownButton, MenuItem, Image,
-  Media, Grid, } from 'react-bootstrap';
+import { Form, Row, Col, Grid, } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 class Settings extends Component {
 
@@ -10,14 +9,16 @@ class Settings extends Component {
     this.state = {
       isEditing: false,
       email: '',
+      isDeleted: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleEdit = this.toggleEdit.bind(this)
+    this.deleteAcc = this.deleteAcc.bind(this);
   }
 
   handleChange (event) {
-    event.preventDefault()
+    event.preventDefault();
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -31,25 +32,31 @@ class Settings extends Component {
               }
             )
             .then(jsonRes => {
-              console.log(jsonRes);
               this.setState({ email: jsonRes[0].email});
             })
             .catch(error => {
+              console.log(error);
               alert("Incorrect username or password--please try again.");
             })
   }
 
-  deleteAcc() {
+  toggleDeleted() {
+    localStorage.setItem('authenticated', 'false');
+    this.setState({ isDeleted: true });
+  }
+
+  deleteAcc (event) {
+    event.preventDefault();
     fetch("/studentDelete?un=" + localStorage.getItem('currUser'))
-            .then(res => {
-              })
+            .then(this.toggleDeleted())
             .catch(error => {
-              alert("");
+              console.log(error);
+              alert("We couldn't delete this account--uh oh.");
             })
   }
 
   handleSubmit (event) {
-    event.preventDefault()
+    event.preventDefault();
     fetch('/studentEmailUpdate?un=' + localStorage.getItem('currUser') +
     "&email=" + this.state.email, {
             method: 'POST',
@@ -58,17 +65,20 @@ class Settings extends Component {
         })
         .then(this.toggleEdit())
         .catch(error => {
-          alert("??");
+          alert("Problem submitting email--please try again.");
           console.log(error);
         });
   }
 
   toggleEdit() {
-    this.setState({isEditing: !this.state.isEditing})
+    this.setState({isEditing: !this.state.isEditing});
   }
 
   render() {
-    if(this.state.isEditing) {
+    if (this.state.isDeleted) {
+      return <Redirect to='/' />;
+    }
+    if (this.state.isEditing) {
       return (
         <div>
         <Grid>
@@ -84,7 +94,7 @@ class Settings extends Component {
             <Form onSubmit={this.handleSubmit}>
             <Col>
                 <input type='text' value={this.state.email} onChange={this.handleChange} name='email' />
-              
+
             </Col>
             <Col>
               <button onClick={this.toggleEdit}>edit</button>
@@ -96,7 +106,7 @@ class Settings extends Component {
           </Row>
 
           <Row>
-            
+
           </Row>
           <Row>
             <button onClick={this.deleteAcc}>Delete Your Account</button>
@@ -124,7 +134,7 @@ class Settings extends Component {
               <button onClick={this.toggleEdit}>edit</button>
             </Col>
           </Row>
-          
+
           <Row>
 
           </Row>

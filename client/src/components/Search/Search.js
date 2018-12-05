@@ -101,7 +101,7 @@ class Search extends Component {
               alert("Uh oh--something went wrong with getting school information.  Please try again.");
     })
     })
-  } 
+  }
 
   handleSchoolClick = event => {
     localStorage.setItem('currSchool', event.target.textContent);
@@ -122,7 +122,6 @@ class Search extends Component {
     }
     let uninames = this.state.universities.map(uni => uni.uni_name);
     let unis = uninames.map(uniname => <li key={uniname} onClick={this.handleUniClick}>{uniname}</li> );
-    //selected university
 
     let peoplenames = this.state.people.map(ppl => ppl.p_name);
     let people = peoplenames.map(peoplename => <li key={peoplename} onClick={this.handlePeopleClick}>{peoplename}</li> );
