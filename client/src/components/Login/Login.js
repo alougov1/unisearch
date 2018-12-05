@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 import { Grid, Row, Col } from 'react-bootstrap';
-import { Redirect, Prompt } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 export default class Login extends Component {
   constructor(props) {
