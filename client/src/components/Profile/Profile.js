@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { FormGroup, Form, Row, Col, FormControl, Button,
-  ControlLabel, HelpBlock, Glyphicon, DropdownButton, MenuItem, Image,
-  Media, Grid, } from 'react-bootstrap';
-import imggg from './listtt.png';
+import { Form, Row, Col, Grid, } from 'react-bootstrap';
 import './Profile.css';
-import PropTypes from 'prop-types';
 
 
 class Profile extends Component {

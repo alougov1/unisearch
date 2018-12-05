@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { FormGroup, Form, Row, Col, FormControl, Button,
-  ControlLabel, HelpBlock, Glyphicon, DropdownButton, MenuItem, Image,
-  Media, Grid, } from 'react-bootstrap';
+import { Row, Col, Grid } from 'react-bootstrap';
 import './People.css';
-import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom'
 
 
@@ -34,7 +31,7 @@ class People extends Component {
               this.setState({ name: jsonRes[0].p_name,
                               jobTitle: jsonRes[0].job_title,
                               gender: jsonRes[0].gender,
-                              age: jsonRes[0].age, 
+                              age: jsonRes[0].age,
                               university: jsonRes[0].university,});
             })
             .catch(error => {

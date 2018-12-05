@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { FormGroup, Form, Row, Col, FormControl, Button,
-  ControlLabel, HelpBlock, Glyphicon, DropdownButton, MenuItem, Image,
-  Media, Grid, } from 'react-bootstrap';
+import { Row, Col, Grid } from 'react-bootstrap';
 import './School.css';
-import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom'
 
 class School extends Component {
@@ -102,7 +99,7 @@ class School extends Component {
               <p>{this.state.act}</p>
             </Col>
           </Row>
-          
+
           <Row>
             <Col xs='2' />
             <Col xs='2'>

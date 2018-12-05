@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './Search.css';
-import { FormGroup, Form, Row, Col, FormControl, Button,
-  ControlLabel, HelpBlock, Glyphicon, DropdownButton, MenuItem, Image,
-  Media, Grid, } from 'react-bootstrap';
+import { Row, Col, Grid, } from 'react-bootstrap';
   import { Redirect } from 'react-router-dom'
 
 class Search extends Component {
@@ -140,10 +138,10 @@ class Search extends Component {
           <li>Number of Students: {selected.num_students}</li>
           <li>Mascot: {selected.mascot}</li>
           <li>Number of Dining Halls: {selected.num_dining_halls}</li>
-          <li>Acceptance Rate: {selected.accpt_rate}</li>
+          <li>Acceptance Rate: {selected.accpt_rate}%</li>
           <li>Athletic Conference: {selected.athletic_conf}</li>
           <li>Number of Colleges: {selected.num_colleges}</li>
-          <li>Graduation Rate: {selected.grad_rate}</li>
+          <li>Graduation Rate: {selected.grad_rate}%</li>
         </ul>
       }
     return (
