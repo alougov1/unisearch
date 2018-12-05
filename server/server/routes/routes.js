@@ -88,7 +88,6 @@ var appRouter = function (app) {
   app.post("/uniListAdd", (req, res) => {
     const currUser = req.query.un;
     const uni = req.query.uni;
-    const num = 5;
     var sqlQuery = mysql.format('CALL insert_uniList(?, ?)', [currUser, uni]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
