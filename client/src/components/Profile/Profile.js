@@ -238,8 +238,8 @@ class Profile extends Component {
           <Row>
           <Col xs='2' />
           <Col xs='8'>
-            <p>{this.state.username}'s University List</p>
-            <ul>
+            <p className='pleaseBold'>{this.state.username}'s University List</p>
+            <ul className='unis'>
               {unis}
             </ul>
           </Col>
@@ -359,8 +359,8 @@ class Profile extends Component {
           <Row>
           <Col xs='2' />
           <Col xs='8'>
-            <p>{this.state.username}'s University List</p>
-            <ul>
+            <p className='pleaseBold'>{this.state.username}'s University List</p>
+            <ul className='unis'>
               {unis}
             </ul>
 

@@ -139,7 +139,7 @@ export default class Login extends Component {
     if(this.state.creatingAcc) {
       return(
           <div className="container">
-          <Grid>
+          <Grid className="createAcc">
               <Row>
                   <Col>
                       <div className="create">
@@ -241,7 +241,7 @@ export default class Login extends Component {
     }
     return (
         <div className="container">
-        <Grid>
+        <Grid className="login">
             <Row>
                 <Col>
                     <div className="Login">

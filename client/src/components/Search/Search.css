@@ -1,7 +1,3 @@
-.Table-container {
-    margin-top:10px;
-}
-
 .row {
     background-color:white;
 }
@@ -17,6 +13,9 @@ li {
     margin:0;
     background-color:white;
     list-style-position: unset;
+}
+.paddingg {
+    padding-top: 15px;
 }
 
 li:hover {
@@ -39,9 +38,22 @@ li:hover {
     padding-top: 15px;
 }
 
+.col-xs-3  a{
+    background-color:white;
+    padding-top: 15px;
+    font-size:10px
+}
+
 .col-xs-3 li:hover{
     background-color:white;
     color:black;
+    
+}
+
+.unclickUnis li:hover{
+    background-color:white;
+    color:black;
+    
 }
 
 input {

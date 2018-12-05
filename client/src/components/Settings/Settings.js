@@ -87,8 +87,9 @@ class Settings extends Component {
       return (
         <div>
         <Grid>
-          <Row>
-            Settings
+          <div className='bb'>
+          <Row className='bb'>
+            <p className='pleaseBold'>Settings</p>
           </Row>
           <Row>
             <Col>
@@ -99,7 +100,6 @@ class Settings extends Component {
             <Form onSubmit={this.handleSubmit}>
             <Col>
                 <input type='text' value={this.state.email} onChange={this.handleChange} name='email' />
-
             </Col>
             <Col>
               <button onClick={this.toggleEdit}>edit</button>
@@ -116,6 +116,7 @@ class Settings extends Component {
           <Row>
             <button onClick={this.deleteAcc}>Delete Your Account</button>
           </Row>
+          </div>
         </Grid>
       </div>
       )
@@ -124,7 +125,7 @@ class Settings extends Component {
       <div>
         <Grid>
           <Row>
-            Settings
+            <p className='pleaseBold'>Settings </p>
           </Row>
           <Row>
             <Col>

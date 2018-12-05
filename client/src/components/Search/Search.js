@@ -132,7 +132,7 @@ class Search extends Component {
     let selected = this.state.universities.find(e => e.uni_name === this.state.selectedUni);
     let uniInfo = <ul></ul>
     if (selected !== undefined) {
-      uniInfo = <ul key={selected.uni_name}>
+      uniInfo = <ul key={selected.uni_name} className='unclickUnis'>
           <li>Location: {selected.location}</li>
           <li>Avg Admitted GPA: {selected.gpa_avg}</li>
           <li>Avg ACT: {selected.act}</li>
@@ -153,40 +153,42 @@ class Search extends Component {
           </Row>
           <Row>
             <Col xs='4'>
-              <form>
-                <input onChange={this.handleChange} />
-              </form>
               <div className="Table-container">
-                <p>Universities</p>
-                <ul>
+                <p className='pleaseBold'>Universities</p>
+                <form>
+                  <input classname='paddingg' onChange={this.handleChange} />
+                </form>
+                <ul className='paddingg'>
                   {unis}
                 </ul>
               </div>
             </Col>
 
             <Col xs='5'>
-                <p className='uniheader'>Selected University:</p>
+                <p className='pleaseBold'>Selected University:</p>
                 <p>{this.state.selectedUni}</p>
                 {uniInfo}
-                <p>People of Interest</p>
+                <p className='pleaseBold'>People of Interest</p>
                 {people}
-                <p>Schools</p>
+                <p className='pleaseBold'>Schools</p>
                 {schools}
             </Col>
 
             <Col xs='3'>
-              <p>{this.state.username}'s Info</p>
+              <p className='pleaseBold'>{this.state.username}'s Info</p>
               <ul>
-                <li>{this.state.username}</li>
-                <li>{this.state.gpa}</li>
-                <li>{this.state.act}</li>
-                <li>{this.state.sat}</li>
-                <li>{this.state.gender}</li>
-                <li>{this.state.age}</li>
-                <li>{this.state.hometown}</li>
+              <p>Username: </p><li>{this.state.username}</li>
+              <p>GPA: </p><li>{this.state.gpa}</li>
+              <p>ACT: </p><li>{this.state.act}</li>
+              <p>SAT: </p><li>{this.state.sat}</li>
+              <p>Gender: </p><li>{this.state.gender}</li>
+              <p>Age: </p><li>{this.state.age}</li>
+              <p>Hometown: </p><li>{this.state.hometown}</li>
 
               </ul>
             </Col>
+          </Row>
+          <Row>
           </Row>
         </Grid>
       </div>
