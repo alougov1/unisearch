@@ -156,7 +156,7 @@ class Search extends Component {
               <div className="Table-container">
                 <p className='pleaseBold'>Universities</p>
                 <form>
-                  <input classname='paddingg' onChange={this.handleChange} />
+                  <input className='paddingg' onChange={this.handleChange} />
                 </form>
                 <ul className='paddingg'>
                   {unis}

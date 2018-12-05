@@ -58,7 +58,6 @@ class Profile extends Component {
               }
             )
             .then(jsonRes => {
-              console.log(jsonRes);
               this.setState({
                 unis: jsonRes
               });
@@ -80,7 +79,7 @@ class Profile extends Component {
                 })
                 .catch(error => {
                   console.log(error);
-                  alert("Error deleting university");
+            //      alert("Error deleting university");
                 });
   }
 
@@ -111,6 +110,7 @@ class Profile extends Component {
 
   handleSubmit (event) {
     event.preventDefault()
+    if (this.validateNewAcctForm()) {
     fetch('/studentUpdate?un=' + localStorage.getItem('currUser') +
     "&act=" + this.state.act +
     "&sat=" + this.state.sat + "&gpa=" + this.state.gpa + "&gender=" + this.state.gender +
@@ -123,10 +123,42 @@ class Profile extends Component {
         .catch(error => {
         //  alert("Invalid inputs--try again.");
         });
+      }
   }
 
   toggleEdit() {
     this.setState({isEditing: !this.state.isEditing})
+  }
+
+  validateNewAcctForm() {
+    let flag = true;
+    if (!(this.state.gpa >= 0 && this.state.gpa <= 4.0 && this.state.gpa.length > 0)) {
+      alert("Please enter a GPA between 0 and 4.0");
+      flag = false;
+    }
+    if (!(this.state.act >= 0 && this.state.act <= 36)) {
+      alert("Please enter an ACT between 0 and 36");
+      flag = false;
+    }
+    //technically, SAT can only be 200-1600.  However, leaving option to hold as 0 at the moment
+    //in case of people who haven't taken yet.  Would ideally convert to null or similar later.
+    if (!(this.state.sat >= 0 && this.state.sat <= 1600)) {
+      alert("Please enter an SAT between 0 and 1600");
+      flag = false;
+    }
+    if (!(this.state.age >= 1)) {
+      alert("You're older than 0 years old--we know you are");
+      flag = false;
+    }
+    if (!(this.state.gender.length > 0) || this.state.gender.length > 20) {
+      alert("Please enter a gender (if your gender length is over 20, please let us know so we can accommodate!)");
+      flag = false;
+    }
+    if (!(this.state.hometown.length > 0) || this.state.hometown.length > 45) {
+      alert("Please enter a hometown");
+      flag = false;
+    }
+    return flag;
   }
 
   render() {
@@ -147,7 +179,7 @@ class Profile extends Component {
           <Row>
             <Col xs='2' />
             <Col xs='2' className='fields'>
-              <label htmlFor='firstName'>
+              <label htmlFor='username'>
                 Username
               </label>
             </Col>
@@ -238,8 +270,8 @@ class Profile extends Component {
           <Row>
           <Col xs='2' />
           <Col xs='8'>
-            <p className='pleaseBold'>{this.state.username}'s University List</p>
-            <ul className='unis'>
+            <p>{this.state.username}'s University List</p>
+            <ul>
               {unis}
             </ul>
           </Col>
@@ -264,12 +296,12 @@ class Profile extends Component {
           <Row>
             <Col xs='2' />
             <Col xs='2' className='fields'>
-              <label htmlFor='firstName'>
+              <label htmlFor='username'>
                 Username
               </label>
             </Col>
             <Col xs='8'>
-              <input type='text' value={this.state.username} onChange={this.handleChange} name='username' />
+              <p>{this.state.username}</p>
             </Col>
           </Row>
 
@@ -359,8 +391,8 @@ class Profile extends Component {
           <Row>
           <Col xs='2' />
           <Col xs='8'>
-            <p className='pleaseBold'>{this.state.username}'s University List</p>
-            <ul className='unis'>
+            <p>{this.state.username}'s University List</p>
+            <ul>
               {unis}
             </ul>
 
