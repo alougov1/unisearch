@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
-import { Grid, Row, Col, code} from 'react-bootstrap';
-import { Redirect } from 'react-router-dom'
+import { Grid, Row, Col } from 'react-bootstrap';
+import { Redirect, Prompt } from 'react-router-dom';
 
 export default class Login extends Component {
   constructor(props) {
@@ -45,8 +45,12 @@ export default class Login extends Component {
   validateNewAcctForm() {
     var validator = require("email-validator");
     let flag = true;
-    if (!validator.validate(this.state.email)) {
+    if (!validator.validate(this.state.email) || this.state.email.length > 40) {
       alert("Please enter a valid email");
+      flag = false;
+    }
+    if (!(this.state.password.length > 0) || this.state.password.length > 20) {
+      alert("Please enter a valid password (<= 20 characters in length)");
       flag = false;
     }
     if (!(this.state.gpa >= 0 && this.state.gpa <= 4.0 && this.state.gpa.length > 0)) {
@@ -57,19 +61,21 @@ export default class Login extends Component {
       alert("Please enter an ACT between 0 and 36");
       flag = false;
     }
-    if (!(this.state.sat >= 200 && this.state.sat <= 1600)) {
-      alert("Please enter an SAT between 200 and 1600");
+    //technically, SAT can only be 200-1600.  However, leaving option to hold as 0 at the moment
+    //in case of people who haven't taken yet.  Would ideally convert to null or similar later.
+    if (!(this.state.sat >= 0 && this.state.sat <= 1600)) {
+      alert("Please enter an SAT between 0 and 1600");
       flag = false;
     }
     if (!(this.state.age >= 1)) {
       alert("You're older than 0 years old--we know you are");
       flag = false;
     }
-    if (!(this.state.gender.length > 0)) {
-      alert("Please enter a gender");
+    if (!(this.state.gender.length > 0) || this.state.gender.length > 20) {
+      alert("Please enter a gender (if your gender length is over 20, please let us know so we can accommodate!)");
       flag = false;
     }
-    if (!(this.state.hometown.length > 0)) {
+    if (!(this.state.hometown.length > 0) || this.state.hometown.length > 45) {
       alert("Please enter a hometown");
       flag = false;
     }
@@ -126,12 +132,17 @@ export default class Login extends Component {
   }
 
   render() {
+    let { isNotAuth } = !this.state.authenticated;
     if(this.state.authenticated) {
       return <Redirect to='/components/Search/Search.js' />
     }
     if(this.state.creatingAcc) {
       return(
           <div className="container">
+          <Prompt
+            when={ isNotAuth }
+            message="Please log in to move on."
+          />
           <Grid>
               <Row>
                   <Col>
@@ -234,6 +245,10 @@ export default class Login extends Component {
     }
     return (
         <div className="container">
+        <Prompt
+          when={ isNotAuth }
+          message="Please log in to move on."
+        />
         <Grid>
             <Row>
                 <Col>

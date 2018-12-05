@@ -143,9 +143,7 @@ var appRouter = function (app) {
     const sat = req.query.sat;
     const gender = req.query.gender;
     const age = req.query.age;
-
-    var sqlQuery = mysql.format('CALL create_studentAcc(username, student_pass, gpa, act, sat, gender, age, hometown, email) ' +
-    'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    var sqlQuery = mysql.format('CALL create_studentAcc(?, ?, ?, ?, ?, ?, ?, ?, ?) ',
     [username, pass, gpa, act, sat, gender, age, hometown, email]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
@@ -156,7 +154,7 @@ var appRouter = function (app) {
   app.post("/studentEmailUpdate", (req, res) => {
     const currUser = req.query.un;
     const email = req.query.email;
-    var sqlQuery = mysql.format('CALL update_studnetEmail(?, ?)',
+    var sqlQuery = mysql.format('CALL update_studentEmail(?, ?)',
     [currUser, email]);
     connection.query(sqlQuery, function (err, result, fields) {
         if (err) throw err;
