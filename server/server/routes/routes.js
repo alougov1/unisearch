@@ -187,9 +187,7 @@ var appRouter = function (app) {
     const currPass = req.query.pass;
 
     var sqlQuery = mysql.format('SELECT * FROM studentAccount WHERE username=?', [currentUser]);
-    //ADD SOMETHING TO MAKE SURE THIS DOESN"T BREAK IF UNDEFINED PARAMS
     connection.query(sqlQuery, function(err, result, fields) {
-      //MODIFY THIS TO BE MORE SOPHISTICATED ERROR HANDLING LATER
       if (err) throw err;
       if (!result.length) {
         res.send("undefined");
