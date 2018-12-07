@@ -1,12 +1,11 @@
 var mysql = require('mysql');
 
-var user = input("Enter username for AWS Database access: ")
-var pass = input("Enter password for AWS Database access: ")
 var connection = mysql.createConnection({
   host     : 'unisearch.cw7uxohppzrc.us-east-1.rds.amazonaws.com',
   port      :  '3306',
-  user     : user,
-  password : pass,
+  //this is dummy data--the connection won't work with these credentials.
+  user     : 'asdf',
+  password : 'asdf',
   database : 'unisearch'
 
 });
