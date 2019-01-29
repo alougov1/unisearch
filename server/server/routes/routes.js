@@ -22,7 +22,7 @@ if(!err) {
 
 var appRouter = function (app) {
   app.get("/", function(req, res) {
-    res.status(200).send("Welcome to our restful API");
+    res.status(200).send("This request works! Congrats!");
   });
 
   app.get("/student", function (req, res) {
@@ -56,7 +56,7 @@ var appRouter = function (app) {
   });
 
   app.get("/school", function (req, res) {
-    //run this to get data about current user from DB
+    //run this to get data about a university's schools
     const uni = req.query.uni;
     var sqlQuery = mysql.format('SELECT * FROM school WHERE uni_name=?', [uni]);
     connection.query(sqlQuery, function (err, result, fields) {
@@ -66,7 +66,7 @@ var appRouter = function (app) {
   });
 
   app.get("/uniList", function (req, res) {
-    //run this to get data about current user from DB
+    //run this to get data about current universitylist
     const currentUser = req.query.un;
     var sqlQuery = mysql.format('SELECT * FROM studentUniList WHERE username=?', [currentUser]);
     connection.query(sqlQuery, function (err, result, fields) {
@@ -76,7 +76,7 @@ var appRouter = function (app) {
   });
 
   app.get("/schoolInfo", function (req, res) {
-    //run this to get data about current user from DB
+    //run this to get data about current school
     const uni = req.query.uni;
     const school = req.query.sch;
     var sqlQuery = mysql.format('SELECT * FROM school WHERE uni_name=? AND school_name=?', [uni, school]);
