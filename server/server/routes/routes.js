@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
   host     : 'unisearch.cw7uxohppzrc.us-east-1.rds.amazonaws.com',
   port      :  '3306',
-  //this is dummy data--the connection won't work with these credentials.
+  //this is dummy data to create a general user to read from DB
   user     : 'asdf',
   password : 'asdf',
   database : 'unisearch'
